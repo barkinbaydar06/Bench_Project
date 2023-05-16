@@ -1,2 +1,2 @@
 # Bench
-CS Group Prject: Bench (Sportech)
+CS Group Project: Bench (Sportech)
