@@ -1,4 +1,4 @@
-package com.sportech.bench;
+package com.example.b;
 
 import android.content.Context;
 
@@ -21,6 +21,6 @@ public class ExampleInstrumentedTest {
     public void useAppContext() {
         // Context of the app under test.
         Context appContext = InstrumentationRegistry.getInstrumentation().getTargetContext();
-        assertEquals("com.sportech.bench", appContext.getPackageName());
+        assertEquals("com.example.b", appContext.getPackageName());
     }
 }

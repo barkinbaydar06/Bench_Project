@@ -1,4 +1,4 @@
-package com.sportech.bench;
+package com.example.b;
 
 import org.junit.Test;
 
