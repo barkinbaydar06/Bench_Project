@@ -8,9 +8,8 @@
 
     <ImageButton
         android:id="@+id/addButtonProfile"
-        android:layout_width="0dp"
+        android:layout_width="139dp"
         android:layout_height="101dp"
-        android:layout_marginEnd="1dp"
         android:adjustViewBounds="true"
         android:backgroundTint="#D3D3D3"
         android:padding="20dp"
@@ -23,9 +22,8 @@
 
     <ImageButton
         android:id="@+id/matchesButtonProfile"
-        android:layout_width="0dp"
+        android:layout_width="139dp"
         android:layout_height="101dp"
-        android:layout_marginEnd="132dp"
         android:adjustViewBounds="true"
         android:background="#FFFFFF"
         android:backgroundTint="#D1D1D1"
@@ -33,7 +31,7 @@
         android:scaleType="fitCenter"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/addButtonProfile"
+        app:layout_constraintStart_toStartOf="parent"
         app:srcCompat="@drawable/football" />
 
     <ImageButton
@@ -77,7 +75,7 @@
         android:id="@+id/jmInfo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="26dp"
+        android:layout_marginTop="27dp"
         android:text="Joined Matches:"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="@+id/usernameInfo"
@@ -87,19 +85,35 @@
         android:id="@+id/userUsername"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="35dp"
+        android:layout_marginStart="20dp"
         android:text="example.user"
         app:layout_constraintBottom_toBottomOf="@+id/usernameInfo"
-        app:layout_constraintStart_toStartOf="@+id/userInfo"
+        app:layout_constraintStart_toEndOf="@+id/jmInfo"
         app:layout_constraintTop_toTopOf="@+id/usernameInfo" />
 
     <ListView
         android:layout_width="278dp"
         android:layout_height="0dp"
-        android:layout_marginTop="31dp"
+        android:layout_marginTop="30dp"
         android:layout_marginBottom="28dp"
         app:layout_constraintBottom_toTopOf="@+id/addButtonProfile"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/jmInfo" />
+
+    <ImageButton
+        android:id="@+id/logoutButton"
+        android:layout_width="39dp"
+        android:layout_height="43dp"
+        android:layout_marginStart="20dp"
+        android:adjustViewBounds="true"
+        android:backgroundTint="#F83737"
+        android:foregroundTint="#EF2020"
+        android:padding="5dp"
+        android:scaleType="fitCenter"
+        app:layout_constraintBottom_toBottomOf="@+id/usernameInfo"
+        app:layout_constraintStart_toEndOf="@+id/userUsername"
+        app:layout_constraintTop_toTopOf="@+id/usernameInfo"
+        app:srcCompat="@drawable/logout" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

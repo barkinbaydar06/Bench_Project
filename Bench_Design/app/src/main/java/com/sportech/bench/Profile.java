@@ -9,13 +9,14 @@ import android.widget.ImageButton;
 
 public class Profile extends AppCompatActivity {
 
-    private ImageButton matchesButton, newMatchButton;
+    private ImageButton matchesButton, newMatchButton, logoutButton;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
-        matchesButton = findViewById(R.id.matchesButtonProfile);
-        newMatchButton = findViewById(R.id.addButtonProfile);
+        matchesButton = (ImageButton) findViewById(R.id.matchesButtonProfile);
+        newMatchButton = (ImageButton) findViewById(R.id.addButtonProfile);
+        logoutButton = (ImageButton) findViewById(R.id.logoutButton);
         matchesButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -26,6 +27,12 @@ public class Profile extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 goToNewMatchPage();
+            }
+        });
+        logoutButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                logout();
             }
         });
     }
@@ -43,5 +50,12 @@ public class Profile extends AppCompatActivity {
         Intent newMatchIntent = new Intent(Profile.this, NewMatch.class);
         finish();
         startActivity(newMatchIntent);
+    }
+
+    protected void logout()
+    {
+        Intent logoutIntent = new Intent(Profile.this, MainActivity.class);
+        finish();
+        startActivity(logoutIntent);
     }
 }
