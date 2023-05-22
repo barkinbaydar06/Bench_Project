@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MatchInfo">
+
+    <TextView
+        android:id="@+id/MItext"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="100dp"
+        android:text="Match Information"
+        android:textSize="23sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/nameI"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="45dp"
+        android:layout_marginTop="50dp"
+        android:text="Name:"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/MItext" />
+
+    <TextView
+        android:id="@+id/dateI"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="Date:"
+        app:layout_constraintStart_toStartOf="@+id/nameI"
+        app:layout_constraintTop_toBottomOf="@+id/nameI" />
+
+    <TextView
+        android:id="@+id/timeI"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="Time:"
+        app:layout_constraintStart_toStartOf="@+id/dateI"
+        app:layout_constraintTop_toBottomOf="@+id/dateI" />
+
+    <TextView
+        android:id="@+id/adressI"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="Adress:"
+        app:layout_constraintStart_toStartOf="@+id/timeI"
+        app:layout_constraintTop_toBottomOf="@+id/timeI" />
+
+    <TextView
+        android:id="@+id/playerNoI"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="Player Number:"
+        app:layout_constraintEnd_toEndOf="@+id/adressI"
+        app:layout_constraintStart_toEndOf="@+id/adressI"
+        app:layout_constraintTop_toBottomOf="@+id/adressI" />
+
+    <TextView
+        android:id="@+id/nameInfo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:layout_marginEnd="29dp"
+        android:text="example.Match"
+        app:layout_constraintEnd_toEndOf="@+id/MItext"
+        app:layout_constraintTop_toBottomOf="@+id/MItext" />
+
+    <TextView
+        android:id="@+id/dateInfo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="12/03/23"
+        app:layout_constraintStart_toStartOf="@+id/nameInfo"
+        app:layout_constraintTop_toBottomOf="@+id/nameInfo" />
+
+    <TextView
+        android:id="@+id/timeInfo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="15:30"
+        app:layout_constraintStart_toStartOf="@+id/dateInfo"
+        app:layout_constraintTop_toBottomOf="@+id/dateInfo" />
+
+    <TextView
+        android:id="@+id/adressInfo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="Konutkent 2 Halısaha"
+        app:layout_constraintStart_toStartOf="@+id/timeInfo"
+        app:layout_constraintTop_toBottomOf="@+id/timeInfo" />
+
+    <TextView
+        android:id="@+id/playerNoInfo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="5/16"
+        app:layout_constraintStart_toStartOf="@+id/adressInfo"
+        app:layout_constraintTop_toBottomOf="@+id/adressInfo" />
+
+    <Button
+        android:id="@+id/registerButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="95dp"
+        android:layout_marginEnd="50dp"
+        android:backgroundTint="#8BC34A"
+        android:text="Register"
+        app:layout_constraintBottom_toBottomOf="@+id/unregisterButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/playerNoI" />
+
+    <Button
+        android:id="@+id/backButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:backgroundTint="@color/cem"
+        android:text="Back"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/registerButton" />
+
+    <Button
+        android:id="@+id/unregisterButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="95dp"
+        android:layout_marginEnd="80dp"
+        android:backgroundTint="#E91E1E"
+        android:text="Unregister"
+        app:layout_constraintEnd_toStartOf="@+id/registerButton"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/playerNoI" />
+</androidx.constraintlayout.widget.ConstraintLayout>
