@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MatchesActivity">
+
+    <ImageButton
+        android:id="@+id/matchesButtonMatches"
+        android:layout_width="139dp"
+        android:layout_height="101dp"
+        android:adjustViewBounds="true"
+        android:background="#FFFFFF"
+        android:backgroundTint="@color/cem"
+        android:padding="20dp"
+        android:scaleType="fitCenter"
+        app:srcCompat="@drawable/football"
+        tools:layout_editor_absoluteX="140dp"
+        tools:layout_editor_absoluteY="630dp" />
+
+    <ImageButton
+        android:id="@+id/profileButtonMatches"
+        android:layout_width="133dp"
+        android:layout_height="101dp"
+        android:adjustViewBounds="true"
+        android:backgroundTint="#D3D3D3"
+        android:padding="20dp"
+        android:scaleType="fitCenter"
+        app:layout_constraintBottom_toBottomOf="@+id/matchesButtonMatches"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/matchesButtonMatches"
+        app:layout_constraintTop_toTopOf="@+id/matchesButtonMatches"
+        app:srcCompat="@drawable/profile" />
+
+    <ImageButton
+        android:id="@+id/addButtonMatches"
+        android:layout_width="139dp"
+        android:layout_height="101dp"
+        android:layout_marginEnd="1dp"
+        android:adjustViewBounds="true"
+        android:backgroundTint="#D3D3D3"
+        android:padding="20dp"
+        android:scaleType="fitCenter"
+        app:layout_constraintBottom_toBottomOf="@+id/matchesButtonMatches"
+        app:layout_constraintEnd_toStartOf="@+id/matchesButtonMatches"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/matchesButtonMatches"
+        app:srcCompat="@drawable/add" />
+
+    <ListView
+        android:id="@+id/matchesList"
+        android:layout_width="411dp"
+        android:layout_height="534dp"
+        android:layout_marginBottom="10dp"
+        app:layout_constraintBottom_toTopOf="@+id/matchesButtonMatches" />
+
+    <TextView
+        android:id="@+id/matchesPageText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:layout_marginBottom="10dp"
+        android:text="Matches"
+        android:textSize="23sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/matchesList"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:layout_editor_absoluteX="162dp" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
