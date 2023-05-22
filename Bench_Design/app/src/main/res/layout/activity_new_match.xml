@@ -126,7 +126,7 @@
         android:layout_marginTop="11dp"
         android:layout_marginEnd="28dp"
         android:text="Players Needed:"
-        app:layout_constraintEnd_toStartOf="@+id/dayInput5"
+        app:layout_constraintEnd_toStartOf="@+id/playerNoInput"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/adressInput" />
 
@@ -176,7 +176,7 @@
         app:layout_constraintStart_toEndOf="@+id/dateN" />
 
     <EditText
-        android:id="@+id/dayInput5"
+        android:id="@+id/playerNoInput"
         android:layout_width="0dp"
         android:layout_height="36dp"
         android:layout_marginEnd="3dp"
@@ -191,7 +191,7 @@
         app:layout_constraintStart_toEndOf="@+id/nbpN" />
 
     <EditText
-        android:id="@+id/dayInput4"
+        android:id="@+id/hourInput"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:ems="10"
@@ -203,7 +203,7 @@
         app:layout_constraintBottom_toBottomOf="@+id/column"
         app:layout_constraintEnd_toEndOf="@+id/dayInput"
         app:layout_constraintStart_toStartOf="@+id/dayInput"
-        app:layout_constraintTop_toTopOf="@+id/monthInput2" />
+        app:layout_constraintTop_toTopOf="@+id/minuteInput" />
 
     <EditText
         android:id="@+id/monthInput"
@@ -221,7 +221,7 @@
         app:layout_constraintTop_toTopOf="@+id/dayInput" />
 
     <EditText
-        android:id="@+id/monthInput2"
+        android:id="@+id/minuteInput"
         android:layout_width="0dp"
         android:layout_height="35dp"
         android:layout_marginTop="53dp"
@@ -279,7 +279,7 @@
         android:textSize="14sp"
         app:layout_constraintBottom_toTopOf="@+id/matchesButtonCreate"
         app:layout_constraintEnd_toStartOf="@+id/maxPNumber"
-        app:layout_constraintStart_toEndOf="@+id/dayInput5"
+        app:layout_constraintStart_toEndOf="@+id/playerNoInput"
         app:layout_constraintTop_toBottomOf="@+id/matchN" />
 
     <TextView
@@ -292,7 +292,7 @@
         android:textAlignment="center"
         android:textSize="14sp"
         app:layout_constraintBottom_toTopOf="@+id/adressInput"
-        app:layout_constraintEnd_toStartOf="@+id/monthInput2"
+        app:layout_constraintEnd_toStartOf="@+id/minuteInput"
         app:layout_constraintStart_toEndOf="@+id/TimeN"
         app:layout_constraintTop_toBottomOf="@+id/slash1" />
 
@@ -326,5 +326,5 @@
         android:backgroundTint="@color/cem"
         android:text="Cancel"
         app:layout_constraintEnd_toStartOf="@+id/confirmButton"
-        app:layout_constraintTop_toBottomOf="@+id/dayInput5" />
+        app:layout_constraintTop_toBottomOf="@+id/playerNoInput" />
 </androidx.constraintlayout.widget.ConstraintLayout>
