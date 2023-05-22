@@ -1,7 +1,9 @@
 package com.sportech.bench;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -13,10 +15,12 @@ import android.widget.ImageButton;
 public class NewMatch extends AppCompatActivity {
 
         private ImageButton profileButton, matchesButton;
-        private Button cancelButton;
+        private Button cancelButton, confirmButton;
         private EditText name, day, month, year, hour, min, adress, playerNo;
         private String matchName, matchDay, matchMonth, matchYear, matchHour, matchMinute, matchAdress, playersNeeded;
         private static boolean cancelClicked;
+
+        AlertDialog.Builder confirmAlertBuilder;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -25,6 +29,9 @@ public class NewMatch extends AppCompatActivity {
         matchesButton = findViewById(R.id.matchesButtonCreate);
 
         cancelButton = findViewById(R.id.cancelButton);
+        confirmButton = findViewById(R.id.confirmButton);
+
+        confirmAlertBuilder = new AlertDialog.Builder(this);
 
         name = findViewById(R.id.matchNameInput);
         day = findViewById(R.id.dayInput);
@@ -53,6 +60,12 @@ public class NewMatch extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 cancelCreating();
+            }
+        });
+        confirmButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                informationCheck();
             }
         });
     }
@@ -98,6 +111,217 @@ public class NewMatch extends AppCompatActivity {
 
     protected void confirmCreating()
     {
+
+    }
+
+    protected void informationCheck()
+    {
+        if ((name.getText().length() > 0))
+        {
+            if (day.getText().length() > 0)
+            {
+                if (Integer.parseInt(day.getText().toString()) > 31 )
+                {
+                    confirmAlertBuilder.setTitle("Alert");
+                    confirmAlertBuilder.setMessage("Please enter a valid date!");
+                    confirmAlertBuilder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.cancel();
+                        }
+                    });
+                    confirmAlertBuilder.show();
+                }
+                else
+                {
+                    if (month.getText().length() > 0)
+                    {
+                        if (Integer.parseInt(month.getText().toString()) > 12)
+                        {
+                            confirmAlertBuilder.setTitle("Alert");
+                            confirmAlertBuilder.setMessage("Please enter a valid date!");
+                            confirmAlertBuilder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    dialog.cancel();
+                                }
+                            });
+                            confirmAlertBuilder.show();
+                        }
+                        else
+                        {
+                            if (year.getText().length() > 0)
+                            {
+                                if (Integer.parseInt(year.getText().toString()) > 23 )
+                                {
+                                    confirmAlertBuilder.setTitle("Alert");
+                                    confirmAlertBuilder.setMessage("Please enter a valid date!");
+                                    confirmAlertBuilder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface dialog, int which) {
+                                            dialog.cancel();
+                                        }
+                                    });
+                                    confirmAlertBuilder.show();
+                                }
+                                else
+                                {
+                                    if (hour.getText().length() > 0)
+                                    {
+                                        if (Integer.parseInt(hour.getText().toString()) > 24)
+                                        {
+                                            confirmAlertBuilder.setTitle("Alert");
+                                            confirmAlertBuilder.setMessage("Please enter a valid time!");
+                                            confirmAlertBuilder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                                                @Override
+                                                public void onClick(DialogInterface dialog, int which) {
+                                                    dialog.cancel();
+                                                }
+                                            });
+                                            confirmAlertBuilder.show();
+                                        }
+                                        else
+                                        {
+                                            if (min.getText().length() > 0)
+                                            {
+                                                if (Integer.parseInt(min.getText().toString()) > 59)
+                                                {
+                                                    confirmAlertBuilder.setTitle("Alert");
+                                                    confirmAlertBuilder.setMessage("Please enter a valid time!");
+                                                    confirmAlertBuilder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                                                        @Override
+                                                        public void onClick(DialogInterface dialog, int which) {
+                                                            dialog.cancel();
+                                                        }
+                                                    });
+                                                    confirmAlertBuilder.show();
+                                                }
+                                                else
+                                                {
+                                                    if (adress.getText().length()>0)
+                                                    {
+                                                        if (playerNo.getText().length() > 0)
+                                                        {
+                                                            if (Integer.parseInt(playerNo.getText().toString()) > 16)
+                                                            {
+                                                                confirmAlertBuilder.setTitle("Alert");
+                                                                confirmAlertBuilder.setMessage("Please enter a valid number of players!");
+                                                                confirmAlertBuilder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                                                                    @Override
+                                                                    public void onClick(DialogInterface dialog, int which) {
+                                                                        dialog.cancel();
+                                                                    }
+                                                                });
+                                                                confirmAlertBuilder.show();
+                                                            }
+                                                        }
+                                                        else
+                                                        {
+                                                            confirmAlertBuilder.setTitle("Alert");
+                                                            confirmAlertBuilder.setMessage("Player number cannot be empty!");
+                                                            confirmAlertBuilder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                                                                @Override
+                                                                public void onClick(DialogInterface dialog, int which) {
+                                                                    dialog.cancel();
+                                                                }
+                                                            });
+                                                            confirmAlertBuilder.show();
+                                                        }
+                                                    }
+                                                    else
+                                                    {
+                                                        confirmAlertBuilder.setTitle("Alert");
+                                                        confirmAlertBuilder.setMessage("Address cannot be empty!");
+                                                        confirmAlertBuilder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                                                            @Override
+                                                            public void onClick(DialogInterface dialog, int which) {
+                                                                dialog.cancel();
+                                                            }
+                                                        });
+                                                        confirmAlertBuilder.show();
+                                                    }
+                                                }
+                                            }
+                                            else
+                                            {
+                                                confirmAlertBuilder.setTitle("Alert");
+                                                confirmAlertBuilder.setMessage("Minute cannot be empty!");
+                                                confirmAlertBuilder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                                                    @Override
+                                                    public void onClick(DialogInterface dialog, int which) {
+                                                        dialog.cancel();
+                                                    }
+                                                });
+                                                confirmAlertBuilder.show();
+                                            }
+                                        }
+                                    }
+                                    else
+                                    {
+                                        confirmAlertBuilder.setTitle("Alert");
+                                        confirmAlertBuilder.setMessage("Hour cannot be empty!");
+                                        confirmAlertBuilder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                                            @Override
+                                            public void onClick(DialogInterface dialog, int which) {
+                                                dialog.cancel();
+                                            }
+                                        });
+                                        confirmAlertBuilder.show();
+                                    }
+                                }
+                            }
+                            else
+                            {
+                                confirmAlertBuilder.setTitle("Alert");
+                                confirmAlertBuilder.setMessage("Year cannot be empty!");
+                                confirmAlertBuilder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        dialog.cancel();
+                                    }
+                                });
+                                confirmAlertBuilder.show();
+                            }
+                        }
+                    }
+                    else {
+                        confirmAlertBuilder.setTitle("Alert");
+                        confirmAlertBuilder.setMessage("Month cannot be empty!");
+                        confirmAlertBuilder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.cancel();
+                            }
+                        });
+                        confirmAlertBuilder.show();
+                    }
+                }
+            }
+            else {
+                confirmAlertBuilder.setTitle("Alert");
+                confirmAlertBuilder.setMessage("Day cannot be empty!");
+                confirmAlertBuilder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.cancel();
+                    }
+                });
+                confirmAlertBuilder.show();
+            }
+        }
+        else
+        {
+            confirmAlertBuilder.setTitle("Alert");
+            confirmAlertBuilder.setMessage("The name cannot be empty!");
+            confirmAlertBuilder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    dialog.cancel();
+                }
+            });
+            confirmAlertBuilder.show();
+        }
+
 
     }
 
