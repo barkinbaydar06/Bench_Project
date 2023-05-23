@@ -16,7 +16,7 @@
             android:name=".MatchInfo"
             android:exported="false" />
         <activity
-            android:name=".MainActivity"
+            android:name=".NewMatch"
             android:exported="false" />
         <activity
             android:name=".Profile"
@@ -25,7 +25,7 @@
             android:name=".MatchesActivity"
             android:exported="false" />
         <activity
-            android:name=".NewMatch"
+            android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
