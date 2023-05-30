@@ -33,8 +33,8 @@ public class FindMatch {
         return CompareAddresses(match.GetAddress(), player.GetAddress());
     }
     public static ArrayList<Match> FindMatches(Player player, int matchCount){
-        ArrayList<Match> AppropriateMatches = new ArrayList<Match>(matchCount);
-        TreeMap<Integer, Match> MatchesAndSimilarities = new TreeMap<Integer, Match>();
+        ArrayList<Match> AppropriateMatches = new ArrayList<>(matchCount);
+        TreeMap<Integer, Match> MatchesAndSimilarities = new TreeMap<>();
 
         HashSet<Match> matches = Database.GetAllMatchInfo();
 

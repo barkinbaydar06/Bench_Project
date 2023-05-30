@@ -8,6 +8,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 
 public class Database {
@@ -45,7 +46,7 @@ public class Database {
         return users;
     }
     public static HashSet<Match> GetAllMatchInfo(){
-        HashSet<Match> matches = new HashSet<Match>();
+        HashSet<Match> matches = new HashSet<>();
 
         matchReference.addValueEventListener(new ValueEventListener() {
             @Override
@@ -60,6 +61,14 @@ public class Database {
         });
 
         return matches;
+    }
+    public static ArrayList<Match> GetAllMatchInfoArrayList(){
+        HashSet<Match> matches = GetAllMatchInfo();
+        ArrayList<Match> matchesArrayList = new ArrayList<>(matches.size());
+
+        matchesArrayList.addAll(matches);
+
+        return matchesArrayList;
     }
     public static boolean UserExists(String userName){
         final boolean[] userExists = new boolean[1];
