@@ -11,6 +11,12 @@ public class Match {
     String Title;
     private final String MatchID;
 
+    public Match(String adress)
+    {
+        SetAddress(adress);
+
+        MatchID = UUID.randomUUID().toString();
+    }
     public Match(String address, Calendar time){
         SetAddress(address);
         SetTime(time);

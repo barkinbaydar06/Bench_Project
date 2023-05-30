@@ -69,6 +69,7 @@ public class NewMatch extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 informationCheck();
+                confirmCreating();
             }
         });
     }
@@ -115,16 +116,21 @@ public class NewMatch extends AppCompatActivity {
     protected void confirmCreating()
     {
         if(informationCheck()){
+
             Calendar matchTime = Calendar.getInstance();
             matchTime.set(Calendar.YEAR, Integer.parseInt(matchYear));
             matchTime.set(Calendar.MONTH, Integer.parseInt(matchMonth));
             matchTime.set(Calendar.DAY_OF_MONTH, Integer.parseInt(matchDay));
             matchTime.set(Calendar.HOUR_OF_DAY, Integer.parseInt(matchHour));
             matchTime.set(Calendar.MINUTE, Integer.parseInt(matchMinute));
+            
 
-            Match newMatch = new Match(matchAdress, matchTime);
+            Match newMatch = new Match(matchAdress);
 
             Database.AddMatch(newMatch);
+            Intent cancelIntent = new Intent(NewMatch.this, MatchesActivity.class);
+            finish();
+            startActivity(cancelIntent);
         }
     }
 
