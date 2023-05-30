@@ -7,7 +7,7 @@ import java.util.Objects;
 public class UserInfo {
 
     private String UserName;
-    private String CodedPassword;
+    private String SecurePassword;
     private Calendar BirthDate;
 
     public void SetUsername(String username){
@@ -15,7 +15,7 @@ public class UserInfo {
     }
     public void SetPassword(String password) throws NoSuchAlgorithmException {
         String EncryptedPassword = Password.Encrypt(password);
-        CodedPassword = Password.Hash(EncryptedPassword);
+        SecurePassword = Password.Hash(EncryptedPassword);
     }
     public void SetBirthDate(Calendar date){
         BirthDate = date;
@@ -32,11 +32,12 @@ public class UserInfo {
 
     }
 
-    public String getUserName(){
-        return getUserName();
+    public String GetUserName(){
+        return UserName;
     }
+    public Calendar GetBirthDate() {return BirthDate; }
     public boolean IsThePassword(String input) throws NoSuchAlgorithmException {
         String EncryptedPassword = Password.Encrypt(input);
-        return Objects.equals(CodedPassword, Password.Hash(EncryptedPassword));
+        return Objects.equals(SecurePassword, Password.Hash(EncryptedPassword));
     }
 }
