@@ -7,21 +7,10 @@ public class Player {
     String Address;
     Calendar EarliestTime;
     Calendar LatestTime;
-    HashSet<Position> DesiredPositions;
 
     public Player(String address, Calendar earliestTime, Calendar latestTime){
         SetAddress(address);
         SetTime(earliestTime, latestTime);
-    }
-
-    public void AddPosition(Position p){
-        DesiredPositions.add(p);
-    }
-    public void RemovePosition(Position p){
-        DesiredPositions.remove(p);
-    }
-    public HashSet<Position> GetPositions(){
-        return DesiredPositions;
     }
 
     public String GetAddress(){

@@ -61,12 +61,12 @@ public class Database {
 
         return matches;
     }
-    public static boolean UserExists(User user){
+    public static boolean UserExists(String userName){
         final boolean[] userExists = new boolean[1];
         userReference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                userExists[0] = snapshot.hasChild(user.GetUserName());
+                userExists[0] = snapshot.hasChild(userName);
             }
 
             @Override

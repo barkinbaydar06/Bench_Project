@@ -10,6 +10,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import java.security.NoSuchAlgorithmException;
+
 public class Register extends AppCompatActivity {
 
     protected Button signUpButton, cancelButton;
@@ -47,15 +49,14 @@ public class Register extends AppCompatActivity {
         startActivity(cancelIntent);
     }
 
-    protected void confirmSignUp()
-        {
+    protected void confirmSignUp() throws NoSuchAlgorithmException {
             if (usernameInput.getText().toString().length() != 0)
             {
                 if (passwordInput.getText().toString().length() != 0)
                 {
-                    if (arePasswordsMatch())
+                    if (arePasswordsMatch() && !Database.UserExists(usernameInput.getText().toString()))
                     {
-
+                        createAccount();
                     }
                     else
                     {
@@ -99,14 +100,13 @@ public class Register extends AppCompatActivity {
 
     protected boolean arePasswordsMatch()
     {
-        if (passwordInput.getText().toString().equals(confirmPasswordInput.getText().toString()))
-        {
-            return true;
-        }
-        else
-        {
-            return false;
-        }
+        return passwordInput.getText().toString().equals(confirmPasswordInput.getText().toString());
+    }
+
+    private void createAccount() throws NoSuchAlgorithmException {
+        User newUser = new User(usernameInput.getText().toString(), passwordInput.getText().toString());
+
+        Database.AddUser(newUser);
     }
 
 }

@@ -7,18 +7,20 @@ import java.util.UUID;
 public class Match {
     String Address;
     Calendar Time;
-    ArrayList<Position> RequiredPositions;
     ArrayList<User> Players;
-
     String Title;
-    String Subtext;
-    String MatchID;
+    private final String MatchID;
 
-    public Match(String address, Calendar time, String title, String subtext){
+    public Match(String address, Calendar time){
         SetAddress(address);
         SetTime(time);
-        SetTitle(title);
-        SetSubtext(subtext);
+
+        MatchID = UUID.randomUUID().toString();
+    }
+    public Match(String address, Calendar time, String title){
+        SetAddress(address);
+        SetTime(time);
+        SetText(title);
 
         MatchID = UUID.randomUUID().toString();
     }
@@ -28,15 +30,6 @@ public class Match {
     }
     public void RemovePlayer(User p){
         Players.remove(p);
-    }
-    public void AddPosition(Position p){
-        RequiredPositions.add(p);
-    }
-    public void RemovePosition(Position p){
-        RequiredPositions.remove(p);
-    }
-    public ArrayList<Position> GetPositions(){
-        return RequiredPositions;
     }
     public ArrayList<User> GetPlayers(){
         return Players;
@@ -48,11 +41,8 @@ public class Match {
     public Calendar GetTime(){
         return Time;
     }
-    public String GetTitle(){
+    public String GetText(){
         return Title;
-    }
-    public String GetSubtext(){
-        return Subtext;
     }
 
     public void SetAddress(String s){
@@ -61,11 +51,8 @@ public class Match {
     public void SetTime(Calendar t){
         Time = t;
     }
-    public void SetTitle(String t){
+    public void SetText(String t){
         Title = t;
-    }
-    public void SetSubtext(String t){
-        Subtext = t;
     }
     public String GetMatchID(){ return MatchID; }
 

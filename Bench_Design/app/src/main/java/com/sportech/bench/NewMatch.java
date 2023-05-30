@@ -12,6 +12,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 
+import java.util.Calendar;
+
+
 public class NewMatch extends AppCompatActivity {
 
         private ImageButton profileButton, matchesButton;
@@ -111,7 +114,18 @@ public class NewMatch extends AppCompatActivity {
 
     protected void confirmCreating()
     {
+        if(informationCheck()){
+            Calendar matchTime = Calendar.getInstance();
+            matchTime.set(Calendar.YEAR, Integer.parseInt(matchYear));
+            matchTime.set(Calendar.MONTH, Integer.parseInt(matchMonth));
+            matchTime.set(Calendar.DAY_OF_MONTH, Integer.parseInt(matchDay));
+            matchTime.set(Calendar.HOUR_OF_DAY, Integer.parseInt(matchHour));
+            matchTime.set(Calendar.MINUTE, Integer.parseInt(matchMinute));
 
+            Match newMatch = new Match(matchAdress, matchTime);
+
+            Database.AddMatch(newMatch);
+        }
     }
 
     protected boolean informationCheck()

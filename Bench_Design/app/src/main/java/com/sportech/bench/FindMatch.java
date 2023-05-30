@@ -25,19 +25,8 @@ public class FindMatch {
     private static boolean IsAppropriateDate(Calendar earliest, Calendar latest, Calendar matchTime){
         return matchTime.after(earliest) && matchTime.before(latest);
     }
-    private static boolean IsAppropriatePosition(HashSet<Position> desiredPositions, ArrayList<Position> requiredPositions){
-        for(Position pos : desiredPositions){
-            if(requiredPositions.contains(pos)){
-                return true;
-            }
-        }
-        return false;
-    }
     private static int CompareCriterias(Match match, Player player){
         if(!IsAppropriateDate(player.GetEarliestTime(), player.GetLatestTime(), match.GetTime())){
-            return -1;
-        }
-        if(!IsAppropriatePosition(player.GetPositions(), match.GetPositions())){
             return -1;
         }
 
