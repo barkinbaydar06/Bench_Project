@@ -1,7 +1,6 @@
 package com.sportech.bench;
 
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.TreeMap;
@@ -22,7 +21,7 @@ public class FindMatch {
 
         return similarityscore;
     }
-    private static boolean IsAppropriateDate(Calendar earliest, Calendar latest, Calendar matchTime){
+    private static boolean IsAppropriateDate(Time earliest, Time latest, Time matchTime){
         return matchTime.after(earliest) && matchTime.before(latest);
     }
     private static int CompareCriterias(Match match, Player player){

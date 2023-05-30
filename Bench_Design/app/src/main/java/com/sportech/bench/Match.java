@@ -1,23 +1,27 @@
 package com.sportech.bench;
 
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.UUID;
 
 public class Match {
-    String Address;
-    Calendar Time;
-    ArrayList<User> Players;
-    String Title;
+    public String Address;
+    public Time Time;
+    public ArrayList<User> Players;
+    public String Title;
     private final String MatchID;
 
-    public Match(String address, Calendar time){
+    public Match(String address){
+        SetAddress(address);
+
+        MatchID = UUID.randomUUID().toString();
+    }
+    public Match(String address, Time time){
         SetAddress(address);
         SetTime(time);
 
         MatchID = UUID.randomUUID().toString();
     }
-    public Match(String address, Calendar time, String title){
+    public Match(String address, Time time, String title){
         SetAddress(address);
         SetTime(time);
         SetText(title);
@@ -38,7 +42,7 @@ public class Match {
     public String GetAddress(){
         return Address;
     }
-    public Calendar GetTime(){
+    public Time GetTime(){
         return Time;
     }
     public String GetText(){
@@ -48,7 +52,7 @@ public class Match {
     public void SetAddress(String s){
         Address = s;
     }
-    public void SetTime(Calendar t){
+    public void SetTime(Time t){
         Time = t;
     }
     public void SetText(String t){

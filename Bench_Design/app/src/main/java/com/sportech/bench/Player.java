@@ -1,14 +1,13 @@
 package com.sportech.bench;
 
-import java.util.Calendar;
 import java.util.HashSet;
 
 public class Player {
     String Address;
-    Calendar EarliestTime;
-    Calendar LatestTime;
+    Time EarliestTime;
+    Time LatestTime;
 
-    public Player(String address, Calendar earliestTime, Calendar latestTime){
+    public Player(String address, Time earliestTime, Time latestTime){
         SetAddress(address);
         SetTime(earliestTime, latestTime);
     }
@@ -16,23 +15,23 @@ public class Player {
     public String GetAddress(){
         return Address;
     }
-    public Calendar GetEarliestTime(){
+    public Time GetEarliestTime(){
         return EarliestTime;
     }
-    public Calendar GetLatestTime(){
+    public Time GetLatestTime(){
         return LatestTime;
     }
 
     public void SetAddress(String s){
         Address = s;
     }
-    public void SetEarliestTime(Calendar time){
+    public void SetEarliestTime(Time time){
         EarliestTime = time;
     }
-    public void SetLatestTime(Calendar time){
+    public void SetLatestTime(Time time){
         LatestTime = time;
     }
-    public void SetTime(Calendar earliest, Calendar latest){
+    public void SetTime(Time earliest, Time latest){
         SetEarliestTime(earliest);
         SetLatestTime(latest);
     }
