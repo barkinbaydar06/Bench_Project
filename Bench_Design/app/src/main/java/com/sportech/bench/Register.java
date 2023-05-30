@@ -1,7 +1,9 @@
 package com.sportech.bench;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -11,16 +13,19 @@ import android.widget.EditText;
 public class Register extends AppCompatActivity {
 
     protected Button signUpButton, cancelButton;
-    protected EditText emailInput, passwordInput, confirmPasswordInput;
+    protected EditText usernameInput, passwordInput, confirmPasswordInput;
+    protected AlertDialog.Builder signUpAlertBuilder;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
 
+        signUpAlertBuilder = new AlertDialog.Builder(this);
+
         signUpButton = findViewById(R.id.signUpButton);
         cancelButton = findViewById(R.id.cancelRegisterButton);
-        emailInput = findViewById(R.id.emailInput);
+        usernameInput = findViewById(R.id.usernameInputL);
         passwordInput = findViewById(R.id.signUpPasswordI);
         confirmPasswordInput = findViewById(R.id.confirmPasswordInput);
 
@@ -40,6 +45,68 @@ public class Register extends AppCompatActivity {
         Intent cancelIntent = new Intent(this, MainActivity.class);
         finish();
         startActivity(cancelIntent);
+    }
+
+    protected void confirmSignUp()
+        {
+            if (usernameInput.getText().toString().length() != 0)
+            {
+                if (passwordInput.getText().toString().length() != 0)
+                {
+                    if (arePasswordsMatch())
+                    {
+
+                    }
+                    else
+                    {
+                        signUpAlertBuilder.setTitle("Alert");
+                        signUpAlertBuilder.setMessage("Passwords do not match!");
+                        signUpAlertBuilder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.cancel();
+                            }
+                        });
+                        signUpAlertBuilder.show();
+                    }
+                }
+                else
+                {
+                    signUpAlertBuilder.setTitle("Alert");
+                    signUpAlertBuilder.setMessage("Password cannot be empty!");
+                    signUpAlertBuilder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.cancel();
+                        }
+                    });
+                    signUpAlertBuilder.show();
+                }
+            }
+            else
+            {
+                signUpAlertBuilder.setTitle("Alert");
+                signUpAlertBuilder.setMessage("Username cannot be empty!");
+                signUpAlertBuilder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.cancel();
+                    }
+                });
+                signUpAlertBuilder.show();
+            }
+        }
+
+    protected boolean arePasswordsMatch()
+    {
+        if (passwordInput.getText().toString().equals(confirmPasswordInput.getText().toString()))
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
     }
 
 }

@@ -11,125 +11,93 @@
         android:id="@+id/registerText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="111dp"
-        android:layout_marginBottom="46dp"
         android:text="Sign Up"
         android:textSize="23sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/emailInput"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        tools:layout_editor_absoluteX="165dp"
+        tools:layout_editor_absoluteY="112dp" />
 
     <TextView
-        android:id="@+id/emailText"
+        android:id="@+id/usernameText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="38dp"
-        android:layout_marginEnd="104dp"
-        android:text="E-mail:"
+        android:text="Username:"
         android:textSize="12sp"
-        app:layout_constraintBottom_toBottomOf="@+id/emailInput"
-        app:layout_constraintEnd_toStartOf="@+id/emailInput"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/emailInput" />
+        tools:layout_editor_absoluteX="35dp"
+        tools:layout_editor_absoluteY="197dp" />
 
     <TextView
         android:id="@+id/registerPasswordText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="38dp"
-        android:layout_marginTop="35dp"
-        android:layout_marginEnd="84dp"
         android:text="Password:"
         android:textSize="12sp"
-        app:layout_constraintEnd_toStartOf="@+id/signUpPasswordI"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/emailText" />
+        tools:layout_editor_absoluteX="38dp"
+        tools:layout_editor_absoluteY="249dp" />
 
     <TextView
         android:id="@+id/confirmPasswordText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="38dp"
-        android:layout_marginTop="35dp"
-        android:layout_marginEnd="37dp"
         android:text="Confirm Password:"
         android:textSize="12sp"
-        app:layout_constraintEnd_toStartOf="@+id/confirmPasswordInput"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/registerPasswordText" />
+        tools:layout_editor_absoluteX="38dp"
+        tools:layout_editor_absoluteY="300dp" />
 
     <EditText
-        android:id="@+id/emailInput"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginEnd="25dp"
-        android:layout_marginBottom="176dp"
+        android:id="@+id/usernameInputL"
+        android:layout_width="208dp"
+        android:layout_height="36dp"
         android:ems="10"
-        android:hint="Enter E-Mail"
+        android:hint="Enter Username"
         android:inputType="text"
         android:textAlignment="center"
         android:textSize="10sp"
-        app:layout_constraintBottom_toTopOf="@+id/signUpButton"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/emailText"
-        app:layout_constraintTop_toBottomOf="@+id/registerText" />
+        app:layout_constraintEnd_toEndOf="@+id/signUpPasswordI"
+        app:layout_constraintStart_toStartOf="@+id/signUpPasswordI"
+        tools:layout_editor_absoluteY="187dp" />
 
     <EditText
         android:id="@+id/signUpPasswordI"
-        android:layout_width="0dp"
+        android:layout_width="207dp"
         android:layout_height="36dp"
-        android:layout_marginEnd="25dp"
         android:ems="10"
         android:hint="Enter Password"
         android:inputType="text"
         android:textAlignment="center"
         android:textSize="10sp"
-        app:layout_constraintBottom_toBottomOf="@+id/registerPasswordText"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/registerPasswordText"
-        app:layout_constraintTop_toTopOf="@+id/registerPasswordText" />
+        tools:layout_editor_absoluteX="179dp"
+        tools:layout_editor_absoluteY="239dp" />
 
     <EditText
         android:id="@+id/confirmPasswordInput"
-        android:layout_width="0dp"
+        android:layout_width="208dp"
         android:layout_height="36dp"
-        android:layout_marginEnd="25dp"
         android:ems="10"
         android:hint="Confirm Password"
         android:inputType="text"
         android:textAlignment="center"
         android:textSize="10sp"
-        app:layout_constraintBottom_toBottomOf="@+id/confirmPasswordText"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/confirmPasswordText"
-        app:layout_constraintTop_toTopOf="@+id/confirmPasswordText" />
+        tools:layout_editor_absoluteX="179dp"
+        tools:layout_editor_absoluteY="290dp" />
 
     <Button
         android:id="@+id/signUpButton"
         style="@style/Widget.AppCompat.Button.Small"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
         android:text="Sign Up"
         android:visibility="visible"
-        app:layout_constraintBottom_toTopOf="@+id/cancelRegisterButton"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/emailInput"
+        tools:layout_editor_absoluteX="155dp"
+        tools:layout_editor_absoluteY="398dp"
         tools:visibility="visible" />
 
     <Button
         android:id="@+id/cancelRegisterButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="4dp"
-        android:layout_marginBottom="227dp"
         android:backgroundTint="@color/cem"
         android:text="Cancel"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/signUpButton"
-        app:layout_constraintTop_toBottomOf="@+id/signUpButton" />
+        tools:layout_editor_absoluteX="159dp"
+        tools:layout_editor_absoluteY="456dp" />
 </androidx.constraintlayout.widget.ConstraintLayout>

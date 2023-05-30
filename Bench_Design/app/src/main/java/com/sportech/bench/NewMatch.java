@@ -20,7 +20,7 @@ public class NewMatch extends AppCompatActivity {
         private String matchName, matchDay, matchMonth, matchYear, matchHour, matchMinute, matchAdress, playersNeeded;
         private static boolean cancelClicked;
 
-        AlertDialog.Builder confirmAlertBuilder;
+        protected AlertDialog.Builder confirmAlertBuilder;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -114,7 +114,7 @@ public class NewMatch extends AppCompatActivity {
 
     }
 
-    protected void informationCheck()
+    protected boolean informationCheck()
     {
         if ((name.getText().length() > 0))
         {
@@ -213,6 +213,10 @@ public class NewMatch extends AppCompatActivity {
                                                                     }
                                                                 });
                                                                 confirmAlertBuilder.show();
+                                                            }
+                                                            else
+                                                            {
+                                                                return true;
                                                             }
                                                         }
                                                         else
@@ -321,7 +325,7 @@ public class NewMatch extends AppCompatActivity {
             });
             confirmAlertBuilder.show();
         }
-
+        return false;
 
     }
 
