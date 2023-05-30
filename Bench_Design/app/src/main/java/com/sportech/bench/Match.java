@@ -24,6 +24,7 @@ public class Match {
 
         MatchID = UUID.randomUUID().toString();
     }
+
     public Match(String address, Time time){
 >>>>>>> main
         SetAddress(address);
@@ -31,6 +32,7 @@ public class Match {
 
         MatchID = UUID.randomUUID().toString();
     }
+
     public Match(String address, Time time, String title){
         SetAddress(address);
         SetTime(time);

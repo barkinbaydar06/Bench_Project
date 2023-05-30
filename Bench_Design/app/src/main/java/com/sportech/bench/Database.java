@@ -28,6 +28,7 @@ public class Database {
     public static void RemoveMatch(Match info){
         matchReference.child(info.GetMatchID()).removeValue();
     }
+
     public static HashSet<User> GetAllUserInfo(){
         HashSet<User> users = new HashSet<User>();
 

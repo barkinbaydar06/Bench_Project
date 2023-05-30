@@ -142,7 +142,6 @@ public class NewMatch extends AppCompatActivity {
             startActivity(cancelIntent);
         }
     }
-
     protected boolean informationCheck()
     {
         if ((name.getText().length() > 0))

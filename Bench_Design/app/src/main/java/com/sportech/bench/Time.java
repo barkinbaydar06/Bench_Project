@@ -46,6 +46,7 @@ public class Time {
         }
         else return minute >= earlier.minute;
     }
+
     public boolean before(Time later){
         if(year < later.year){
             return true;
