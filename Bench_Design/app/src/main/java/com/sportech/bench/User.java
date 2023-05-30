@@ -1,13 +1,12 @@
 package com.sportech.bench;
 
 import java.security.NoSuchAlgorithmException;
-import java.util.Calendar;
 import java.util.Objects;
 
 public class User {
 
-    private String UserName;
-    private String SecurePassword;
+    public String UserName;
+    public String SecurePassword;
 
     public void SetUsername(String username){
         UserName = username;
