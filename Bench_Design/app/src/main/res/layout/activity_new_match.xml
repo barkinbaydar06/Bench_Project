@@ -10,13 +10,13 @@
     <ImageButton
         android:id="@+id/addButtonCreate"
         android:layout_width="0dp"
-        android:layout_height="101dp"
+        android:layout_height="0dp"
         android:layout_marginEnd="1dp"
         android:adjustViewBounds="true"
         android:backgroundTint="@color/cem"
         android:padding="20dp"
         android:scaleType="fitCenter"
-        app:layout_constraintBottom_toBottomOf="@+id/matchesButtonCreate"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/matchesButtonCreate"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/matchesButtonCreate"
@@ -25,30 +25,29 @@
     <ImageButton
         android:id="@+id/matchesButtonCreate"
         android:layout_width="0dp"
-        android:layout_height="101dp"
-        android:layout_marginEnd="132dp"
+        android:layout_height="0dp"
         android:adjustViewBounds="true"
         android:background="#FFFFFF"
         android:backgroundTint="#D1D1D1"
         android:padding="20dp"
         android:scaleType="fitCenter"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/profileButtonCreate"
         app:layout_constraintStart_toEndOf="@+id/addButtonCreate"
+        app:layout_constraintTop_toTopOf="@+id/profileButtonCreate"
         app:srcCompat="@drawable/football" />
 
     <ImageButton
         android:id="@+id/profileButtonCreate"
-        android:layout_width="133dp"
-        android:layout_height="101dp"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         android:adjustViewBounds="true"
         android:backgroundTint="#D3D3D3"
         android:padding="20dp"
         android:scaleType="fitCenter"
-        app:layout_constraintBottom_toBottomOf="@+id/matchesButtonCreate"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/matchesButtonCreate"
-        app:layout_constraintTop_toTopOf="@+id/matchesButtonCreate"
         app:srcCompat="@drawable/profile" />
 
     <TextView
@@ -100,9 +99,9 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="44dp"
         android:layout_marginTop="71dp"
-        android:layout_marginEnd="95dp"
+        android:layout_marginEnd="56dp"
         android:text="Time:"
-        app:layout_constraintEnd_toStartOf="@+id/column"
+        app:layout_constraintEnd_toStartOf="@+id/hourInput"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/matchN" />
 
@@ -111,37 +110,49 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="44dp"
+        android:layout_marginTop="61dp"
         android:layout_marginEnd="41dp"
-        android:layout_marginBottom="29dp"
         android:text="Adress:"
-        app:layout_constraintBottom_toBottomOf="@+id/adressInput"
         app:layout_constraintEnd_toStartOf="@+id/adressInput"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/TimeN" />
+
+    <TextView
+        android:id="@+id/NoteText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="44dp"
+        android:layout_marginTop="46dp"
+        android:layout_marginEnd="55dp"
+        android:text="Note:"
+        app:layout_constraintEnd_toStartOf="@+id/notesInput"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/nbpN" />
 
     <TextView
         android:id="@+id/nbpN"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="44dp"
-        android:layout_marginTop="11dp"
+        android:layout_marginTop="40dp"
         android:layout_marginEnd="28dp"
         android:text="Players Needed:"
         app:layout_constraintEnd_toStartOf="@+id/playerNoInput"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/adressInput" />
+        app:layout_constraintTop_toBottomOf="@+id/adressN" />
 
     <EditText
         android:id="@+id/matchNameInput"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="1dp"
         android:layout_marginTop="32dp"
-        android:layout_marginEnd="17dp"
         android:ems="10"
         android:gravity="center"
         android:hint="Enter Match Name"
         android:inputType="text"
         android:textSize="12sp"
-        app:layout_constraintEnd_toEndOf="@+id/yearInput"
+        app:layout_constraintStart_toStartOf="@+id/dayInput"
         app:layout_constraintTop_toBottomOf="@+id/pageText" />
 
     <EditText
@@ -162,38 +173,59 @@
         app:layout_constraintTop_toBottomOf="@+id/TimeN" />
 
     <EditText
+        android:id="@+id/notesInput"
+        android:layout_width="0dp"
+        android:layout_height="48dp"
+        android:layout_marginEnd="19dp"
+        android:ems="10"
+        android:gravity="center"
+        android:hint="Notes"
+        android:inputType="text"
+        android:textSize="12sp"
+        app:layout_constraintBottom_toBottomOf="@+id/NoteText"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/NoteText"
+        app:layout_constraintTop_toTopOf="@+id/NoteText" />
+
+    <EditText
         android:id="@+id/dayInput"
         android:layout_width="0dp"
-        android:layout_height="36dp"
+        android:layout_height="0dp"
+        android:layout_marginEnd="1dp"
         android:ems="10"
         android:gravity="center"
         android:hint="Day"
         android:inputType="phone"
         android:maxLength="2"
         android:textSize="12sp"
-        app:layout_constraintBaseline_toBaselineOf="@+id/slash1"
+        app:layout_constraintBottom_toBottomOf="@+id/monthInput"
         app:layout_constraintEnd_toStartOf="@+id/slash1"
-        app:layout_constraintStart_toEndOf="@+id/dateN" />
+        app:layout_constraintStart_toEndOf="@+id/dateN"
+        app:layout_constraintTop_toTopOf="@+id/monthInput" />
 
     <EditText
         android:id="@+id/playerNoInput"
         android:layout_width="0dp"
-        android:layout_height="36dp"
-        android:layout_marginEnd="3dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="52dp"
+        android:layout_marginEnd="4dp"
+        android:layout_marginBottom="55dp"
         android:ems="10"
         android:gravity="center"
         android:hint="#"
-        android:maxLength="2"
         android:inputType="phone"
+        android:maxLength="2"
         android:textSize="12sp"
-        app:layout_constraintBaseline_toBaselineOf="@+id/slash3"
+        app:layout_constraintBottom_toBottomOf="@+id/NoteText"
         app:layout_constraintEnd_toStartOf="@+id/slash3"
-        app:layout_constraintStart_toEndOf="@+id/nbpN" />
+        app:layout_constraintStart_toEndOf="@+id/nbpN"
+        app:layout_constraintTop_toTopOf="@+id/adressN" />
 
     <EditText
         android:id="@+id/hourInput"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:layout_marginEnd="7dp"
         android:ems="10"
         android:gravity="center"
         android:hint="Hour"
@@ -201,24 +233,26 @@
         android:maxLength="2"
         android:textSize="12sp"
         app:layout_constraintBottom_toBottomOf="@+id/column"
-        app:layout_constraintEnd_toEndOf="@+id/dayInput"
-        app:layout_constraintStart_toStartOf="@+id/dayInput"
+        app:layout_constraintEnd_toStartOf="@+id/column"
+        app:layout_constraintStart_toEndOf="@+id/TimeN"
         app:layout_constraintTop_toTopOf="@+id/minuteInput" />
 
     <EditText
         android:id="@+id/monthInput"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:layout_marginTop="1dp"
+        android:layout_marginBottom="3dp"
         android:ems="10"
         android:gravity="center"
         android:hint="Month"
         android:inputType="phone"
         android:maxLength="2"
         android:textSize="12sp"
-        app:layout_constraintBottom_toBottomOf="@+id/dayInput"
+        app:layout_constraintBottom_toTopOf="@+id/minuteInput"
         app:layout_constraintEnd_toStartOf="@+id/slash2"
         app:layout_constraintStart_toEndOf="@+id/slash1"
-        app:layout_constraintTop_toTopOf="@+id/dayInput" />
+        app:layout_constraintTop_toTopOf="@+id/yearInput" />
 
     <EditText
         android:id="@+id/minuteInput"
@@ -241,60 +275,53 @@
     <EditText
         android:id="@+id/yearInput"
         android:layout_width="0dp"
-        android:layout_height="40dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="13dp"
         android:layout_marginEnd="114dp"
         android:ems="10"
         android:gravity="center"
         android:hint="Year"
-        android:maxLength="2"
         android:inputType="phone"
+        android:maxLength="2"
         android:textSize="12sp"
-        app:layout_constraintBaseline_toBaselineOf="@+id/slash2"
+        app:layout_constraintBottom_toTopOf="@+id/minuteInput"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/slash2" />
+        app:layout_constraintStart_toEndOf="@+id/slash2"
+        app:layout_constraintTop_toBottomOf="@+id/matchNameInput" />
 
     <TextView
         android:id="@+id/slash1"
         android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginTop="21dp"
-        android:layout_marginBottom="20dp"
+        android:layout_height="19dp"
         android:text="/"
         android:textAlignment="center"
         android:textSize="14sp"
-        app:layout_constraintBottom_toTopOf="@+id/TimeN"
+        app:layout_constraintBaseline_toBaselineOf="@+id/monthInput"
         app:layout_constraintEnd_toStartOf="@+id/monthInput"
-        app:layout_constraintStart_toEndOf="@+id/dayInput"
-        app:layout_constraintTop_toBottomOf="@+id/matchNameInput" />
+        app:layout_constraintStart_toEndOf="@+id/dayInput" />
 
     <TextView
         android:id="@+id/slash3"
         android:layout_width="0dp"
         android:layout_height="20dp"
-        android:layout_marginTop="210dp"
-        android:layout_marginEnd="9dp"
-        android:layout_marginBottom="210dp"
+        android:layout_marginEnd="8dp"
         android:text="/"
         android:textAlignment="center"
         android:textSize="14sp"
-        app:layout_constraintBottom_toTopOf="@+id/matchesButtonCreate"
+        app:layout_constraintBaseline_toBaselineOf="@+id/playerNoInput"
         app:layout_constraintEnd_toStartOf="@+id/maxPNumber"
-        app:layout_constraintStart_toEndOf="@+id/playerNoInput"
-        app:layout_constraintTop_toBottomOf="@+id/matchN" />
+        app:layout_constraintStart_toEndOf="@+id/playerNoInput" />
 
     <TextView
         android:id="@+id/column"
         android:layout_width="0dp"
         android:layout_height="30dp"
-        android:layout_marginTop="18dp"
-        android:layout_marginBottom="22dp"
         android:text=":"
         android:textAlignment="center"
         android:textSize="14sp"
-        app:layout_constraintBottom_toTopOf="@+id/adressInput"
+        app:layout_constraintBaseline_toBaselineOf="@+id/minuteInput"
         app:layout_constraintEnd_toStartOf="@+id/minuteInput"
-        app:layout_constraintStart_toEndOf="@+id/TimeN"
-        app:layout_constraintTop_toBottomOf="@+id/slash1" />
+        app:layout_constraintStart_toEndOf="@+id/hourInput" />
 
     <TextView
         android:id="@+id/slash2"
@@ -303,7 +330,7 @@
         android:text="/"
         android:textAlignment="center"
         android:textSize="14sp"
-        app:layout_constraintBaseline_toBaselineOf="@+id/monthInput"
+        app:layout_constraintBaseline_toBaselineOf="@+id/yearInput"
         app:layout_constraintEnd_toStartOf="@+id/yearInput"
         app:layout_constraintStart_toEndOf="@+id/monthInput" />
 
@@ -311,20 +338,22 @@
         android:id="@+id/confirmButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="80dp"
+        android:layout_marginStart="59dp"
+        android:layout_marginEnd="60dp"
         android:backgroundTint="#4CAF50"
         android:text="Confirm"
         app:layout_constraintBaseline_toBaselineOf="@+id/cancelButton"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toEndOf="@+id/notesInput"
+        app:layout_constraintStart_toStartOf="@+id/playerNoInput" />
 
     <Button
         android:id="@+id/cancelButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="62dp"
-        android:layout_marginEnd="55dp"
+        android:layout_marginTop="40dp"
         android:backgroundTint="@color/cem"
         android:text="Cancel"
-        app:layout_constraintEnd_toStartOf="@+id/confirmButton"
-        app:layout_constraintTop_toBottomOf="@+id/playerNoInput" />
+        app:layout_constraintEnd_toStartOf="@+id/notesInput"
+        app:layout_constraintStart_toStartOf="@+id/notesInput"
+        app:layout_constraintTop_toBottomOf="@+id/notesInput" />
 </androidx.constraintlayout.widget.ConstraintLayout>

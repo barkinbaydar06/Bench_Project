@@ -18,8 +18,8 @@ public class NewMatch extends AppCompatActivity {
 
         private ImageButton profileButton, matchesButton;
         private Button cancelButton, confirmButton;
-        private EditText name, day, month, year, hour, min, adress, playerNo;
-        private String matchName, matchDay, matchMonth, matchYear, matchHour, matchMinute, matchAdress, playersNeeded;
+        private EditText name, day, month, year, hour, min, adress, playerNo, notes;
+        private String matchName, matchDay, matchMonth, matchYear, matchHour, matchMinute, matchAdress, playersNeeded, matchNotes;
         private static boolean cancelClicked;
 
         protected AlertDialog.Builder confirmAlertBuilder;
@@ -42,8 +42,8 @@ public class NewMatch extends AppCompatActivity {
         hour = findViewById(R.id.hourInput);
         min = findViewById(R.id.minuteInput);
         adress = findViewById(R.id.adressInput);
-
         playerNo = findViewById(R.id.playerNoInput);
+        notes = findViewById(R.id.notesInput);
         profileButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v)
@@ -107,6 +107,7 @@ public class NewMatch extends AppCompatActivity {
         min.setText("");
         adress.setText("");
         playerNo.setText("");
+        notes.setText("");
 
         Intent cancelIntent = new Intent(NewMatch.this, MatchesActivity.class);
         finish();
@@ -353,6 +354,7 @@ public class NewMatch extends AppCompatActivity {
         matchMinute = min.getText().toString();
         matchAdress = adress.getText().toString();
         playersNeeded = playerNo.getText().toString();
+        matchNotes = notes.getText().toString();
 
         SharedPreferences preferences = getSharedPreferences("MatchInformation", MODE_PRIVATE);
         SharedPreferences.Editor editor = preferences.edit();
@@ -364,6 +366,7 @@ public class NewMatch extends AppCompatActivity {
         editor.putString("minute", matchMinute);
         editor.putString("adress", matchAdress);
         editor.putString("player", playersNeeded);
+        editor.putString("notes", matchNotes);
         editor.apply();
     }
 
@@ -380,6 +383,7 @@ public class NewMatch extends AppCompatActivity {
         matchMinute = preferences.getString("minute","");
         matchAdress = preferences.getString("adress","");
         playersNeeded = preferences.getString("player","");
+        matchNotes = preferences.getString("notes", "");
 
         name.setText(matchName);
         day.setText(matchDay);
@@ -389,6 +393,7 @@ public class NewMatch extends AppCompatActivity {
         min.setText(matchMinute);
         adress.setText(matchAdress);
         playerNo.setText(playersNeeded);
+        notes.setText(matchNotes);
     }
 
 }

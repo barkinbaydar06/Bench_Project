@@ -10,29 +10,29 @@
         android:id="@+id/MItext"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="100dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginBottom="50dp"
         android:text="Match Information"
         android:textSize="23sp"
         android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintBottom_toTopOf="@+id/nameI"
+        app:layout_constraintStart_toEndOf="@+id/nameI" />
 
     <TextView
         android:id="@+id/nameI"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="45dp"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="181dp"
         android:text="Name:"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/MItext" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/dateI"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="21dp"
         android:text="Date:"
         app:layout_constraintStart_toStartOf="@+id/nameI"
         app:layout_constraintTop_toBottomOf="@+id/nameI" />
@@ -50,7 +50,7 @@
         android:id="@+id/adressI"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="21dp"
         android:text="Adress:"
         app:layout_constraintStart_toStartOf="@+id/timeI"
         app:layout_constraintTop_toBottomOf="@+id/timeI" />
@@ -66,6 +66,15 @@
         app:layout_constraintTop_toBottomOf="@+id/adressI" />
 
     <TextView
+        android:id="@+id/NotesText2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="23dp"
+        android:text="Notes:"
+        app:layout_constraintStart_toStartOf="@+id/playerNoI"
+        app:layout_constraintTop_toBottomOf="@+id/playerNoI" />
+
+    <TextView
         android:id="@+id/nameInfo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -79,7 +88,7 @@
         android:id="@+id/dateInfo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="21dp"
         android:text="12/03/23"
         app:layout_constraintStart_toStartOf="@+id/nameInfo"
         app:layout_constraintTop_toBottomOf="@+id/nameInfo" />
@@ -97,10 +106,20 @@
         android:id="@+id/adressInfo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="21dp"
         android:text="Konutkent 2 Halısaha"
         app:layout_constraintStart_toStartOf="@+id/timeInfo"
         app:layout_constraintTop_toBottomOf="@+id/timeInfo" />
+
+    <TextView
+        android:id="@+id/notesInfo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Su getirin!"
+        app:layout_constraintBottom_toBottomOf="@+id/NotesText2"
+        app:layout_constraintEnd_toEndOf="@+id/playerNoInfo"
+        app:layout_constraintStart_toEndOf="@+id/playerNoInfo"
+        app:layout_constraintTop_toTopOf="@+id/NotesText2" />
 
     <TextView
         android:id="@+id/playerNoInfo"
@@ -115,35 +134,34 @@
         android:id="@+id/registerButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="95dp"
+        android:layout_marginStart="49dp"
         android:layout_marginEnd="50dp"
+        android:layout_marginBottom="20dp"
         android:backgroundTint="#8BC34A"
         android:text="Register"
-        app:layout_constraintBottom_toBottomOf="@+id/unregisterButton"
+        app:layout_constraintBottom_toTopOf="@+id/backButton"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/playerNoI" />
+        app:layout_constraintStart_toEndOf="@+id/timeInfo" />
 
     <Button
         android:id="@+id/backButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
+        android:layout_marginEnd="10dp"
         android:backgroundTint="@color/cem"
         android:text="Back"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/registerButton" />
+        app:layout_constraintEnd_toStartOf="@+id/registerButton"
+        app:layout_constraintTop_toBottomOf="@+id/unregisterButton" />
 
     <Button
         android:id="@+id/unregisterButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="50dp"
-        android:layout_marginTop="95dp"
-        android:layout_marginEnd="80dp"
+        android:layout_marginStart="58dp"
+        android:layout_marginTop="54dp"
         android:backgroundTint="#E91E1E"
         android:text="Unregister"
-        app:layout_constraintEnd_toStartOf="@+id/registerButton"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/playerNoI" />
+        app:layout_constraintTop_toBottomOf="@+id/NotesText2" />
 </androidx.constraintlayout.widget.ConstraintLayout>
