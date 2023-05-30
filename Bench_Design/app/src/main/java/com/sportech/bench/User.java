@@ -4,7 +4,6 @@ import java.security.NoSuchAlgorithmException;
 import java.util.Objects;
 
 public class User {
-
     public String UserName;
     public String SecurePassword;
 

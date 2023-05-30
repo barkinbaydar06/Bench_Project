@@ -15,12 +15,14 @@ public class Match {
 
         MatchID = UUID.randomUUID().toString();
     }
+
     public Match(String address, Time time){
         SetAddress(address);
         SetTime(time);
 
         MatchID = UUID.randomUUID().toString();
     }
+
     public Match(String address, Time time, String title){
         SetAddress(address);
         SetTime(time);

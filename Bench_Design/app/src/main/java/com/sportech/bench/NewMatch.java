@@ -123,7 +123,6 @@ public class NewMatch extends AppCompatActivity {
             Database.AddMatch(newMatch);
         }
     }
-
     protected boolean informationCheck()
     {
         if ((name.getText().length() > 0))

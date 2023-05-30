@@ -11,7 +11,6 @@ public class Player {
         SetAddress(address);
         SetTime(earliestTime, latestTime);
     }
-
     public String GetAddress(){
         return Address;
     }
