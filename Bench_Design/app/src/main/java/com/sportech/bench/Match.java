@@ -10,15 +10,6 @@ public class Match {
     public String Title;
     private final String MatchID;
 
-<<<<<<< HEAD
-    public Match(String adress)
-    {
-        SetAddress(adress);
-
-        MatchID = UUID.randomUUID().toString();
-    }
-    public Match(String address, Calendar time){
-=======
     public Match(String address){
         SetAddress(address);
 
@@ -26,7 +17,6 @@ public class Match {
     }
 
     public Match(String address, Time time){
->>>>>>> main
         SetAddress(address);
         SetTime(time);
 

@@ -67,14 +67,9 @@ public class NewMatch extends AppCompatActivity {
         confirmButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-<<<<<<< HEAD
-                informationCheck();
-                confirmCreating();
-=======
                 if(informationCheck()){
                     confirmCreating();
                 }
->>>>>>> main
             }
         });
     }
@@ -121,25 +116,11 @@ public class NewMatch extends AppCompatActivity {
     protected void confirmCreating()
     {
         if(informationCheck()){
-<<<<<<< HEAD
-
-            Calendar matchTime = Calendar.getInstance();
-            matchTime.set(Calendar.YEAR, Integer.parseInt(matchYear));
-            matchTime.set(Calendar.MONTH, Integer.parseInt(matchMonth));
-            matchTime.set(Calendar.DAY_OF_MONTH, Integer.parseInt(matchDay));
-            matchTime.set(Calendar.HOUR_OF_DAY, Integer.parseInt(matchHour));
-            matchTime.set(Calendar.MINUTE, Integer.parseInt(matchMinute));
-            
-=======
             Time matchTime = new Time(Integer.parseInt(matchYear), Integer.parseInt(matchMonth), Integer.parseInt(matchDay), Integer.parseInt(matchHour), Integer.parseInt(matchMinute));
->>>>>>> main
 
-            Match newMatch = new Match(matchAdress);
+            Match newMatch = new Match(matchAdress, matchTime);
 
             Database.AddMatch(newMatch);
-            Intent cancelIntent = new Intent(NewMatch.this, MatchesActivity.class);
-            finish();
-            startActivity(cancelIntent);
         }
     }
     protected boolean informationCheck()
