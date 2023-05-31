@@ -117,11 +117,12 @@ public class NewMatch extends AppCompatActivity {
     protected void confirmCreating()
     {
         if(informationCheck()){
-            Time matchTime = new Time(Integer.parseInt(matchYear), Integer.parseInt(matchMonth), Integer.parseInt(matchDay), Integer.parseInt(matchHour), Integer.parseInt(matchMinute));
+            Time matchTime = new Time(Integer.parseInt(year.getText().toString()), Integer.parseInt(month.getText().toString()), Integer.parseInt(day.getText().toString()), Integer.parseInt(hour.getText().toString()), Integer.parseInt(min.getText().toString()));
 
-            Match newMatch = new Match(matchAdress, matchTime);
+            Match newMatch = new Match(adress.getText().toString(), matchTime, notes.getText().toString());
 
             Database.AddMatch(newMatch);
+            cancelCreating();
         }
     }
     protected boolean informationCheck()

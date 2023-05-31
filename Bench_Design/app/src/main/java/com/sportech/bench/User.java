@@ -1,11 +1,14 @@
 package com.sportech.bench;
 
 import java.security.NoSuchAlgorithmException;
+import java.util.ArrayList;
 import java.util.Objects;
 
 public class User {
     public String UserName;
     public String SecurePassword;
+
+    private ArrayList<Match> Matches;
 
     public void SetUsername(String username){
         UserName = username;
@@ -15,6 +18,10 @@ public class User {
         SecurePassword = Password.Hash(EncryptedPassword);
     }
 
+    public User(){
+        UserName = null;
+        SecurePassword = null;
+    }
     public User(String username, String password) throws NoSuchAlgorithmException {
         SetUsername(username);
         SetPassword(password);
@@ -26,5 +33,15 @@ public class User {
     public boolean IsThePassword(String input) throws NoSuchAlgorithmException {
         String EncryptedPassword = Password.Encrypt(input);
         return Objects.equals(SecurePassword, Password.Hash(EncryptedPassword));
+    }
+
+    public void AddMatch(Match m){
+        Matches.add(m);
+    }
+    public void RemoveMatch(Match m){
+        Matches.remove(m);
+    }
+    public ArrayList<Match> GetMatches(){
+        return Matches;
     }
 }

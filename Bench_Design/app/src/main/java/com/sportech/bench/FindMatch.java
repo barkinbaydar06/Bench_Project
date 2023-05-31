@@ -32,11 +32,12 @@ public class FindMatch {
 
         return CompareAddresses(match.GetAddress(), player.GetAddress());
     }
+    /*
     public static ArrayList<Match> FindMatches(Player player, int matchCount){
         ArrayList<Match> AppropriateMatches = new ArrayList<>(matchCount);
         TreeMap<Integer, Match> MatchesAndSimilarities = new TreeMap<>();
 
-        HashSet<Match> matches = Database.GetAllMatchInfo();
+        ArrayList<Match> matches = Database.GetAllMatchInfo();
 
         for(Match match: matches){
             int Similarity = CompareCriterias(match, player);
@@ -49,5 +50,5 @@ public class FindMatch {
         AppropriateMatches.addAll(MatchesAndSimilarities.values());
 
         return AppropriateMatches;
-    }
+    }*/
 }

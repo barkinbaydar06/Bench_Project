@@ -1,6 +1,10 @@
 package com.sportech.bench;
 
+import android.content.DialogInterface;
+import android.util.Log;
+
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -10,6 +14,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.Objects;
 
 public class Database {
     static FirebaseDatabase rootNode = FirebaseDatabase.getInstance();
@@ -28,61 +33,88 @@ public class Database {
     public static void RemoveMatch(Match info){
         matchReference.child(info.GetMatchID()).removeValue();
     }
+    public static void AddMatchUnderPlayer(User userInfo, Match matchInfo){
+        userReference.child(userInfo.GetUserName()).child("JoinedMatches").setValue(matchInfo.GetMatchID());
+    }
+    public static void AddPlayerUnderMatch(User userInfo, Match matchInfo){
+        matchReference.child(matchInfo.GetMatchID()).child("JoinedPlayers").setValue(userInfo.GetUserName());
+    }
 
-    public static HashSet<User> GetAllUserInfo(){
-        HashSet<User> users = new HashSet<User>();
 
-        userReference.addValueEventListener(new ValueEventListener() {
+    public static void GetAllUserInfo(UserListCallback callback){
+         userReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                ArrayList<User> users = new ArrayList<User>();
                 for (DataSnapshot dsp : dataSnapshot.getChildren()) {
-                    users.add((User)dsp.getValue());
+                    users.add((dsp.getValue(User.class)));
                 }
+                callback.onCallback(users);
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) { }
         });
-
-        return users;
     }
-    public static HashSet<Match> GetAllMatchInfo(){
-        HashSet<Match> matches = new HashSet<>();
-
+    public static void GetAllMatchInfo(MatchListCallback callback){
         matchReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                ArrayList<Match> matches = new ArrayList<Match>();
                 for (DataSnapshot dsp : dataSnapshot.getChildren()) {
-                    matches.add((Match) dsp.getValue());
+                    matches.add(dsp.getValue(Match.class));
                 }
+                callback.onCallback(matches);
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) { }
         });
-
-        return matches;
     }
-    public static ArrayList<Match> GetAllMatchInfoArrayList(){
-        HashSet<Match> matches = GetAllMatchInfo();
-        ArrayList<Match> matchesArrayList = new ArrayList<>(matches.size());
-
-        matchesArrayList.addAll(matches);
-
-        return matchesArrayList;
+    public interface UserListCallback {
+        void onCallback(ArrayList<User> value);
     }
-    public static boolean UserExists(String userName){
-        final boolean[] userExists = new boolean[1];
-        userReference.addListenerForSingleValueEvent(new ValueEventListener() {
+    public interface MatchListCallback {
+        void onCallback(ArrayList<Match> value);
+    }
+    public interface UserCallback {
+        void onCallback(User value);
+    }
+    public interface MatchCallback {
+        void onCallback(Match value);
+    }
+    public interface BooleanCallback {
+        void onCallback(boolean value);
+    }
+    public static void UserExists(String username, BooleanCallback callback){
+        GetAllUserInfo(new UserListCallback() {
             @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                userExists[0] = snapshot.hasChild(userName);
+            public void onCallback(ArrayList<User> value) {
+                boolean exists = false;
+                for(User u: value){
+                    if(u.GetUserName().equals(username)){
+                        exists = true;
+                        break;
+                    }
+                }
+                callback.onCallback(exists);
             }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) { }
         });
-        return userExists[0];
+    }
+    public static void GetUserInfo(String username, UserCallback callback){
+        GetAllUserInfo(new UserListCallback() {
+            @Override
+            public void onCallback(ArrayList<User> value) {
+                User user = null;
+                for(User u: value){
+                    if(u.GetUserName().equals(username)){
+                        user = u;
+                        break;
+                    }
+                }
+                callback.onCallback(user);
+            }
+        });
     }
 }
 

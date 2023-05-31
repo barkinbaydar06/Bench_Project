@@ -38,6 +38,16 @@ public class Register extends AppCompatActivity {
             }
         });
 
+        signUpButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                try {
+                    confirmSignUp();
+                } catch (NoSuchAlgorithmException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+        });
 
     }
 
@@ -54,9 +64,31 @@ public class Register extends AppCompatActivity {
             {
                 if (passwordInput.getText().toString().length() != 0)
                 {
-                    if (arePasswordsMatch() && !Database.UserExists(usernameInput.getText().toString()))
+                    if (arePasswordsMatch())
                     {
-                        createAccount();
+                        Database.UserExists(usernameInput.getText().toString(), new Database.BooleanCallback() {
+                            @Override
+                            public void onCallback(boolean value) {
+                                if(!value){
+                                    try {
+                                        createAccount();
+                                    } catch (NoSuchAlgorithmException e) {
+                                        throw new RuntimeException(e);
+                                    }
+                                }
+                                else {
+                                    signUpAlertBuilder.setTitle("Alert");
+                                    signUpAlertBuilder.setMessage("Username is taken!");
+                                    signUpAlertBuilder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface dialog, int which) {
+                                            dialog.cancel();
+                                        }
+                                    });
+                                    signUpAlertBuilder.show();
+                                }
+                            }
+                        });
                     }
                     else
                     {
@@ -104,9 +136,14 @@ public class Register extends AppCompatActivity {
     }
 
     private void createAccount() throws NoSuchAlgorithmException {
-        User newUser = new User(usernameInput.getText().toString(), passwordInput.getText().toString());
+        String userName = usernameInput.getText().toString();
+        String passWord = passwordInput.getText().toString();
+
+        User newUser = new User(userName, passWord);
 
         Database.AddUser(newUser);
+
+        cancelSignUp();
     }
 
 }

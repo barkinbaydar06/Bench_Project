@@ -10,18 +10,10 @@ public class Match {
     public String Title;
     private final String MatchID;
 
-    public Match(String address){
-        SetAddress(address);
-
+    public Match(){
         MatchID = UUID.randomUUID().toString();
     }
 
-    public Match(String address, Time time){
-        SetAddress(address);
-        SetTime(time);
-
-        MatchID = UUID.randomUUID().toString();
-    }
 
     public Match(String address, Time time, String title){
         SetAddress(address);

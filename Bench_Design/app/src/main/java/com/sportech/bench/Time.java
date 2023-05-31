@@ -7,6 +7,13 @@ public class Time {
     public int hour;
     public int minute;
 
+    public Time(){
+        this.year = 0;
+        this.month = 0;
+        this.day = 0;
+        this.hour = 0;
+        this.minute = 0;
+    }
     public Time(int year, int month, int day, int hour, int minute){
         this.year = year;
         this.month = month;
@@ -44,7 +51,7 @@ public class Time {
         else if(hour > earlier.hour){
             return true;
         }
-        else return minute >= earlier.minute;
+        else return minute > earlier.minute;
     }
 
     public boolean before(Time later){
@@ -60,6 +67,9 @@ public class Time {
         else if(hour < later.hour){
             return true;
         }
-        else return minute <= later.minute;
+        else return minute < later.minute;
+    }
+    public String toString(){
+        return String.format("%s/%s/%s %s.%s", day, month, year, hour, minute);
     }
 }

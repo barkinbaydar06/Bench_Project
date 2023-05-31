@@ -7,10 +7,16 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.ImageButton;
+import android.widget.ListView;
+
+import java.util.ArrayList;
 
 public class Profile extends AppCompatActivity {
 
+    private ListView matchView;
     private ImageButton matchesButton, newMatchButton, logoutButton;
 
     private AlertDialog.Builder logoutConfirmation;
@@ -39,6 +45,30 @@ public class Profile extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 logout();
+            }
+        });
+
+        /*
+        Database.GetAllMatchInfo(new Database.MatchListCallback() {
+            @Override
+            public void onCallback(ArrayList<Match> value) {
+                String[] Titles = new String[value.size()];
+                for(int i = 0; i < value.size(); i++){
+                    Titles[i] = value.get(i).GetText() + value.get(i).GetTime().toString();
+                }
+                CreateListView(Titles);
+            }
+        });*/
+    }
+    private void CreateListView(String[] val){
+        final ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, android.R.id.text1, val);
+        matchView.setAdapter(adapter);
+
+        matchView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
+
+
             }
         });
     }

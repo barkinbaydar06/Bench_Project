@@ -7,9 +7,13 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.provider.Telephony;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+
+import java.security.NoSuchAlgorithmException;
+import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -29,65 +33,82 @@ public class MainActivity extends AppCompatActivity {
 
         usernameInput = findViewById(R.id.usernameInput);
         passwordInput = findViewById(R.id.passwordInput);
-        correctUsername = "admin";
-        correctPassword = "admin123";
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                loginTest();
+                try {
+                    loginTest();
+                } catch (NoSuchAlgorithmException e) {
+                    throw new RuntimeException(e);
+                }
             }
         });
         signUpButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                goToSignUp();
+                try {
+                    goToSignUp();
+                } catch (NoSuchAlgorithmException e) {
+                    throw new RuntimeException(e);
+                }
             }
         });
     }
-
     //Login button testing method
-    protected void loginTest()
-    {
+    protected void loginTest() throws NoSuchAlgorithmException {
         username = usernameInput.getText().toString();
         password = passwordInput.getText().toString();
 
-        if (username.length()>0 && password.length()>0)
-        {
-            if (username.equals(correctUsername))
-            {
-                if (password.equals(correctPassword))
-                {
-                   Intent loginIntent = new Intent(MainActivity.this, MatchesActivity.class);
-                   finish();
-                   startActivity(loginIntent);
-                }
-                else
-                {
-                    loginErrorDialog.setTitle("Alert");
-                    loginErrorDialog.setMessage("Incorrect password!");
+        if (username.length() > 0 && password.length() > 0){
+            Database.UserExists(username, new Database.BooleanCallback() {
+                @Override
+                public void onCallback(boolean value) {
+                    if(value){
+                        Database.GetUserInfo(username, new Database.UserCallback() {
+                            @Override
+                            public void onCallback(User value) {
+                                assert value != null;
 
-                    loginErrorDialog.setNegativeButton("OK", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            dialog.cancel();
-                        }
-                    });
-                    loginErrorDialog.show();
-                }
-            }
-            else
-            {
-                loginErrorDialog.setTitle("Alert");
-                loginErrorDialog.setMessage("Username not found!");
+                                try {
+                                    if(value.IsThePassword(password)){
+                                        Intent loginIntent = new Intent(MainActivity.this, MatchesActivity.class);
+                                        finish();
+                                        startActivity(loginIntent);
+                                    }
+                                    else
+                                    {
+                                        loginErrorDialog.setTitle("Alert");
+                                        loginErrorDialog.setMessage("Incorrect password!");
 
-                loginErrorDialog.setNegativeButton("OK", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.cancel();
+                                        loginErrorDialog.setNegativeButton("OK", new DialogInterface.OnClickListener() {
+                                            @Override
+                                            public void onClick(DialogInterface dialog, int which) {
+                                                dialog.cancel();
+                                            }
+                                        });
+                                        loginErrorDialog.show();
+                                    }
+                                } catch (NoSuchAlgorithmException e) {
+                                    throw new RuntimeException(e);
+                                }
+                            }
+                        });
+
                     }
-                });
-                loginErrorDialog.show();
-            }
+                    else {
+                        loginErrorDialog.setTitle("Alert");
+                        loginErrorDialog.setMessage("Username not found!");
+
+                        loginErrorDialog.setNegativeButton("OK", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.cancel();
+                            }
+                        });
+                        loginErrorDialog.show();
+                    }
+                }
+            });
         }
         else
         {
@@ -104,8 +125,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    protected void goToSignUp()
-    {
+    protected void goToSignUp() throws NoSuchAlgorithmException {
         Intent signIntent = new Intent(this, Register.class);
         finish();
         startActivity(signIntent);
