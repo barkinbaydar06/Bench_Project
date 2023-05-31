@@ -17,6 +17,10 @@ import java.util.HashSet;
 import java.util.Objects;
 
 public class Database {
+
+    public static User currentUser;
+    public static Match currentMatch;
+
     static FirebaseDatabase rootNode = FirebaseDatabase.getInstance();
     static DatabaseReference userReference = rootNode.getReference("UserInfo");
     static DatabaseReference matchReference = rootNode.getReference("MatchInfo");
@@ -113,6 +117,21 @@ public class Database {
                     }
                 }
                 callback.onCallback(user);
+            }
+        });
+    }
+    public static void GetMatchInfo(String matchID, MatchCallback callback){
+        GetAllMatchInfo(new MatchListCallback() {
+            @Override
+            public void onCallback(ArrayList<Match> value) {
+                Match match = null;
+                for(Match m: value){
+                    if(m.GetMatchID().equals(matchID)){
+                        match = m;
+                        break;
+                    }
+                }
+                callback.onCallback(match);
             }
         });
     }

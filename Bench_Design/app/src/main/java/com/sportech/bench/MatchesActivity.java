@@ -81,11 +81,14 @@ public class MatchesActivity extends AppCompatActivity
         matchView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
-
-
+                Intent infoIntent = new Intent(MatchesActivity.this, MatchInfo.class);
+                Database.currentMatch = matches.get(position);
+                finish();
+                startActivity(infoIntent);
             }
         });
     }
+
 
 
     //Menu Bar Button Methods

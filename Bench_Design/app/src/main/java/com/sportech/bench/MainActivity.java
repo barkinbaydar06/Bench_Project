@@ -74,6 +74,8 @@ public class MainActivity extends AppCompatActivity {
                                         Intent loginIntent = new Intent(MainActivity.this, MatchesActivity.class);
                                         finish();
                                         startActivity(loginIntent);
+
+                                        Database.currentUser = value;
                                     }
                                     else
                                     {
