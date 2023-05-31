@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#6AA9CF01"
     tools:context=".MatchInfo">
 
     <TextView
@@ -42,7 +43,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="15dp"
-        android:text="Player Number:"
+        android:text="Players Needed:"
         app:layout_constraintEnd_toEndOf="@+id/adressI"
         app:layout_constraintStart_toEndOf="@+id/adressI"
         app:layout_constraintTop_toBottomOf="@+id/adressI" />
@@ -143,7 +144,7 @@
         android:layout_width="405dp"
         android:layout_height="193dp"
         android:layout_marginBottom="56dp"
-        android:background="#FFE8E8"
+        android:background="#992E7D32"
         app:layout_constraintBottom_toTopOf="@+id/unregisterButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"

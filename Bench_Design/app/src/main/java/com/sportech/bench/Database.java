@@ -17,6 +17,8 @@ public class Database {
     public static User currentUser;
     public static Match currentMatch;
 
+    public static String playersNeeded;
+
     static FirebaseDatabase rootNode = FirebaseDatabase.getInstance();
     static DatabaseReference userReference = rootNode.getReference("UserInfo");
     static DatabaseReference matchReference = rootNode.getReference("MatchInfo");

@@ -21,7 +21,7 @@ public class MatchInfo extends AppCompatActivity {
 
     protected AlertDialog.Builder signUpAlertBuilder;
 
-    private static String name, time, text, requiredPlayers, address;
+    private static String time, text, requiredPlayers, address;
 
     private Button register, unregister, back;
     private TextView matchDate, matchAdress, playerNo, notes;
@@ -54,6 +54,8 @@ public class MatchInfo extends AppCompatActivity {
         matchDate.setText(time);
         matchAdress.setText(address);
         notes.setText(text);
+
+        playerNo.setText(Database.playersNeeded);
 
 
         back.setOnClickListener(new View.OnClickListener() {
@@ -101,6 +103,7 @@ public class MatchInfo extends AppCompatActivity {
     {
         Database.AddMatchUnderPlayer(Database.currentUser, Database.currentMatch);
         Database.AddPlayerUnderMatch(Database.currentUser, Database.currentMatch);
+        decreasePlayerNumber();
 
     }
 
@@ -108,7 +111,36 @@ public class MatchInfo extends AppCompatActivity {
     {
         Database.RemovePlayerUnderMatch(Database.currentUser, Database.currentMatch);
         Database.RemoveMatchUnderPlayer(Database.currentUser, Database.currentMatch);
+        increasePlayerNumber();
+    }
 
+    public void increasePlayerNumber()
+    {
+        int playersNeeded = 0;
+        if (playerNo.getText().toString().charAt(0) != '/')
+        {
+            playersNeeded = Character.getNumericValue(playerNo.getText().toString().charAt(0));
+            if (playerNo.getText().charAt(1) != '/')
+            {
+                String playerNoString = playerNo.getText().toString().substring(0,2);
+                playersNeeded = Integer.parseInt(playerNoString);
+            }
+        }
+        playerNo.setText(String.valueOf(playersNeeded+1)+"/"+"16");
+    }
 
+    public void decreasePlayerNumber()
+    {
+        int playersNeeded = 0;
+        if (playerNo.getText().toString().charAt(0) != '/')
+        {
+            playersNeeded = Character.getNumericValue(playerNo.getText().toString().charAt(0));
+            if (playerNo.getText().charAt(1) != '/')
+            {
+                String playerNoString = playerNo.getText().toString().substring(0,2);
+                playersNeeded = Integer.parseInt(playerNoString);
+            }
+        }
+        playerNo.setText(String.valueOf(playersNeeded - 1)+"/"+16);
     }
 }
