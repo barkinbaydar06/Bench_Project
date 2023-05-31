@@ -122,6 +122,10 @@ public class NewMatch extends AppCompatActivity {
             Match newMatch = new Match(adress.getText().toString(), matchTime, notes.getText().toString());
 
             Database.AddMatch(newMatch);
+
+            Database.AddMatchUnderPlayer(Database.currentUser, newMatch);
+            Database.AddPlayerUnderMatch(Database.currentUser, newMatch);
+
             cancelCreating();
         }
     }

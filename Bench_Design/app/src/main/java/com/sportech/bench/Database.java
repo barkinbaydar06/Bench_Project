@@ -1,10 +1,8 @@
 package com.sportech.bench;
 
-import android.content.DialogInterface;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AlertDialog;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -13,8 +11,6 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.Objects;
 
 public class Database {
 
@@ -38,10 +34,10 @@ public class Database {
         matchReference.child(info.GetMatchID()).removeValue();
     }
     public static void AddMatchUnderPlayer(User userInfo, Match matchInfo){
-        userReference.child(userInfo.GetUserName()).child("JoinedMatches").setValue(matchInfo.GetMatchID());
+        userReference.child(userInfo.GetUserName()).child("JoinedMatches").child(matchInfo.GetMatchID()).setValue(matchInfo.GetMatchID());
     }
     public static void AddPlayerUnderMatch(User userInfo, Match matchInfo){
-        matchReference.child(matchInfo.GetMatchID()).child("JoinedPlayers").setValue(userInfo.GetUserName());
+        matchReference.child(matchInfo.GetMatchID()).child("JoinedPlayers").child(userInfo.GetUserName()).setValue(userInfo.GetUserName());
     }
     public static void RemoveMatchUnderPlayer(User userInfo, Match matchInfo){
         userReference.child(userInfo.GetUserName()).child("JoinedMatches").child(matchInfo.GetMatchID()).removeValue();
@@ -144,17 +140,49 @@ public class Database {
             }
         });
     }
-    public static void GetMatchesUnderUser(User user, StringListCallback callback){
-        userReference.child(user.GetUserName()).child("JoinedMatches").addValueEventListener(new ValueEventListener() {
+    public static void GetJoinedMatches(String userName, StringListCallback callback){
+        userReference.child(userName).child("JoinedMatches").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                ArrayList<String> matches = new ArrayList<String>();
+                for (DataSnapshot dsp : dataSnapshot.getChildren()) {
+                    matches.add(dsp.getValue(String.class));
+
+                }
+                callback.onCallback(matches);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) { }
+        });
+    }
+    public static void GetJoinedPlayers(String matchID, StringListCallback callback){
+        matchReference.child(matchID).child("JoinedPlayers").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 ArrayList<String> users = new ArrayList<String>();
-                Log.i("asd", String.valueOf(users.size()));
                 for (DataSnapshot dsp : dataSnapshot.getChildren()) {
-                    users.add((dsp.getValue(String.class)));
-                    Log.i("asd", String.valueOf(users.size()));
+                    users.add(dsp.getValue(String.class));
+
                 }
                 callback.onCallback(users);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) { }
+        });
+    }
+    public static void GetIfUserJoinedMatch(User user, Match match, BooleanCallback callback){
+        userReference.child(user.GetUserName()).child("JoinedMatches").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                boolean joined = false;
+                for (DataSnapshot dsp : dataSnapshot.getChildren()) {
+                    if(match.GetMatchID().equals(dsp.getValue(String.class))){
+                        joined = true;
+                    }
+                }
+                callback.onCallback(joined);
             }
 
             @Override

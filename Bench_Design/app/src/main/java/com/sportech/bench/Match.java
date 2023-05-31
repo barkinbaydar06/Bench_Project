@@ -8,7 +8,7 @@ public class Match {
     public Time Time;
     public ArrayList<User> Players;
     public String Title;
-    private final String MatchID;
+    public String MatchID;
 
     public Match(){
         MatchID = UUID.randomUUID().toString();

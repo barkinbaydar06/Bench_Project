@@ -52,30 +52,28 @@ public class Profile extends AppCompatActivity {
                 logout();
             }
         });
-
-        Database.GetMatchesUnderUser(Database.currentUser, new Database.StringListCallback() {
+        Database.GetJoinedMatches(Database.currentUser.GetUserName(), new Database.StringListCallback() {
             @Override
             public void onCallback(ArrayList<String> value) {
-                ArrayList<Match> matches = new ArrayList<>();
+                Match[] matches = new Match[value.size()];
+                String[] Titles = new String[value.size()];
 
                 for(int i = 0; i < value.size(); i++){
+                    int finalI = i;
+                    int lastI = value.size() - 1;
                     Database.GetMatchInfo(value.get(i), new Database.MatchCallback() {
                         @Override
                         public void onCallback(Match value) {
-                            matches.add(value);
+                            matches[finalI] = value;
+                            Titles[finalI] = matches[finalI].GetText() + "   " + matches[finalI].GetTime().toString();
 
+                            if(finalI == lastI){
+                                CreateListView(Titles, matches);
+                            }
                         }
                     });
+
                 }
-
-
-
-                String[] Titles = new String[matches.size()];
-                for(int i = 0; i < matches.size(); i++){
-                    Titles[i] = matches.get(i).GetText() + "   " + matches.get(i).GetTime().toString();
-                }
-
-                CreateListView(Titles, matches);
             }
         });
 
@@ -94,7 +92,7 @@ public class Profile extends AppCompatActivity {
             }
         });*/
     }
-    private void CreateListView(String[] val, ArrayList<Match> matches){
+    private void CreateListView(String[] val, Match[] matches){
         final ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, android.R.id.text1, val);
         matchView.setAdapter(adapter);
 
@@ -102,7 +100,7 @@ public class Profile extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
                 Intent infoIntent = new Intent(Profile.this, MatchInfo.class);
-                Database.currentMatch = matches.get(position);
+                Database.currentMatch = matches[position];
                 finish();
                 startActivity(infoIntent);
             }
