@@ -18,8 +18,8 @@ public class NewMatch extends AppCompatActivity {
 
         private ImageButton profileButton, matchesButton;
         private Button cancelButton, confirmButton;
-        private EditText day, month, year, hour, min, adress, playerNo, notes;
-        private String matchDay, matchMonth, matchYear, matchHour, matchMinute, matchAdress, playersNeeded, matchNotes;
+        private EditText name, day, month, year, hour, min, adress, playerNo, notes;
+        private String matchName, matchDay, matchMonth, matchYear, matchHour, matchMinute, matchAdress, playersNeeded, matchNotes;
         private static boolean cancelClicked;
 
         protected AlertDialog.Builder confirmAlertBuilder;
@@ -35,6 +35,7 @@ public class NewMatch extends AppCompatActivity {
 
         confirmAlertBuilder = new AlertDialog.Builder(this);
 
+        name = findViewById(R.id.matchNameInput);
         day = findViewById(R.id.dayInput);
         month = findViewById(R.id.monthInput);
         year = findViewById(R.id.yearInput);
@@ -98,6 +99,7 @@ public class NewMatch extends AppCompatActivity {
         editor.clear();
         editor.apply();
 
+        name.setText("");
         day.setText("");
         month.setText("");
         year.setText("");
@@ -129,6 +131,8 @@ public class NewMatch extends AppCompatActivity {
     }
     protected boolean informationCheck()
     {
+        if ((name.getText().length() > 0))
+        {
             if (day.getText().length() > 0)
             {
                 if (Integer.parseInt(day.getText().toString()) > 31 )
@@ -323,7 +327,21 @@ public class NewMatch extends AppCompatActivity {
                 });
                 confirmAlertBuilder.show();
             }
+        }
+        else
+        {
+            confirmAlertBuilder.setTitle("Alert");
+            confirmAlertBuilder.setMessage("The name cannot be empty!");
+            confirmAlertBuilder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    dialog.cancel();
+                }
+            });
+            confirmAlertBuilder.show();
+        }
         return false;
+
     }
 
     //methods to prevent the texts inside the editTexts to disappear when the activity is changed
@@ -333,6 +351,7 @@ public class NewMatch extends AppCompatActivity {
     {
         super.onPause();
 
+        matchName = name.getText().toString();
         matchDay = day.getText().toString();
         matchMonth = month.getText().toString();
         matchYear = year.getText().toString();
@@ -344,6 +363,7 @@ public class NewMatch extends AppCompatActivity {
 
         SharedPreferences preferences = getSharedPreferences("MatchInformation", MODE_PRIVATE);
         SharedPreferences.Editor editor = preferences.edit();
+        editor.putString("name", matchName);
         editor.putString("day", matchDay);
         editor.putString("month", matchMonth);
         editor.putString("year", matchYear);
@@ -360,6 +380,7 @@ public class NewMatch extends AppCompatActivity {
     {
         super.onResume();
         SharedPreferences preferences = getSharedPreferences("MatchInformation", MODE_PRIVATE);
+        matchName = preferences.getString("name","");
         matchDay = preferences.getString("day","");
         matchMonth = preferences.getString("month","");
         matchYear = preferences.getString("year","");
@@ -369,6 +390,7 @@ public class NewMatch extends AppCompatActivity {
         playersNeeded = preferences.getString("player","");
         matchNotes = preferences.getString("notes", "");
 
+        name.setText(matchName);
         day.setText(matchDay);
         month.setText(matchMonth);
         year.setText(matchYear);
