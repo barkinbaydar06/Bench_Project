@@ -6,17 +6,21 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ImageButton;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 
 public class Profile extends AppCompatActivity {
 
     private ListView matchView;
+
+    private TextView usernameDisplay;
     private ImageButton matchesButton, newMatchButton, logoutButton;
 
     private AlertDialog.Builder logoutConfirmation;
@@ -28,6 +32,7 @@ public class Profile extends AppCompatActivity {
         newMatchButton = (ImageButton) findViewById(R.id.addButtonProfile);
         logoutButton = (ImageButton) findViewById(R.id.logoutButton);
 
+        matchView = findViewById(R.id.profileMatchesList);
         logoutConfirmation = new AlertDialog.Builder(this);
         matchesButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -48,6 +53,35 @@ public class Profile extends AppCompatActivity {
             }
         });
 
+        Database.GetMatchesUnderUser(Database.currentUser, new Database.StringListCallback() {
+            @Override
+            public void onCallback(ArrayList<String> value) {
+                ArrayList<Match> matches = new ArrayList<>();
+
+                for(int i = 0; i < value.size(); i++){
+                    Database.GetMatchInfo(value.get(i), new Database.MatchCallback() {
+                        @Override
+                        public void onCallback(Match value) {
+                            matches.add(value);
+
+                        }
+                    });
+                }
+
+
+
+                String[] Titles = new String[matches.size()];
+                for(int i = 0; i < matches.size(); i++){
+                    Titles[i] = matches.get(i).GetText() + "   " + matches.get(i).GetTime().toString();
+                }
+
+                CreateListView(Titles, matches);
+            }
+        });
+
+        usernameDisplay = findViewById(R.id.userUsername);
+        usernameDisplay.setText(Database.currentUser.GetUserName());
+
         /*
         Database.GetAllMatchInfo(new Database.MatchListCallback() {
             @Override
@@ -60,18 +94,21 @@ public class Profile extends AppCompatActivity {
             }
         });*/
     }
-    private void CreateListView(String[] val){
+    private void CreateListView(String[] val, ArrayList<Match> matches){
         final ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, android.R.id.text1, val);
         matchView.setAdapter(adapter);
 
         matchView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
-
-
+                Intent infoIntent = new Intent(Profile.this, MatchInfo.class);
+                Database.currentMatch = matches.get(position);
+                finish();
+                startActivity(infoIntent);
             }
         });
     }
+
 
     //Menu Bar Button Methods
     protected void goToMatchesPage()

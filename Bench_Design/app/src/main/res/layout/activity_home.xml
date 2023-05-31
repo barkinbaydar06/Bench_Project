@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#A2DF78"
     tools:context=".MatchesActivity">
 
     <ImageButton
@@ -51,11 +52,14 @@
 
     <ListView
         android:id="@+id/matchesList"
-        android:layout_width="0dp"
-        android:layout_height="534dp"
-        android:layout_marginBottom="10dp"
+        android:layout_width="338dp"
+        android:layout_height="476dp"
+        android:layout_marginBottom="24dp"
+        android:background="#7DAC5D"
+        android:divider="@android:drawable/button_onoff_indicator_on"
         app:layout_constraintBottom_toTopOf="@+id/matchesButtonMatches"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.493"
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
@@ -65,11 +69,13 @@
         android:layout_marginTop="30dp"
         android:layout_marginBottom="10dp"
         android:text="Matches"
+        android:textColor="#FFFFFF"
         android:textSize="23sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/matchesList"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.698" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

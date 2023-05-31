@@ -10,20 +10,20 @@
         android:id="@+id/MItext"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="33dp"
-        android:layout_marginBottom="58dp"
+        android:layout_marginBottom="34dp"
         android:text="Match Information"
         android:textSize="23sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/dateInfo"
-        app:layout_constraintStart_toEndOf="@+id/dateI" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:id="@+id/dateI"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="45dp"
-        android:layout_marginTop="189dp"
+        android:layout_marginTop="122dp"
         android:text="Date:"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -32,7 +32,7 @@
         android:id="@+id/adressI"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="13dp"
+        android:layout_marginTop="15dp"
         android:text="Adress:"
         app:layout_constraintStart_toStartOf="@+id/dateI"
         app:layout_constraintTop_toBottomOf="@+id/dateI" />
@@ -41,17 +41,28 @@
         android:id="@+id/playerNoI"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="15dp"
         android:text="Player Number:"
         app:layout_constraintEnd_toEndOf="@+id/adressI"
         app:layout_constraintStart_toEndOf="@+id/adressI"
         app:layout_constraintTop_toBottomOf="@+id/adressI" />
 
     <TextView
-        android:id="@+id/NotesText2"
+        android:id="@+id/playersText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="23dp"
+        android:layout_marginEnd="70dp"
+        android:layout_marginBottom="12dp"
+        android:text="Players:"
+        app:layout_constraintBottom_toTopOf="@+id/playersInMatch"
+        app:layout_constraintEnd_toStartOf="@+id/notesInfo"
+        app:layout_constraintStart_toStartOf="@+id/notesText" />
+
+    <TextView
+        android:id="@+id/notesText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
         android:text="Notes:"
         app:layout_constraintStart_toStartOf="@+id/playerNoI"
         app:layout_constraintTop_toBottomOf="@+id/playerNoI" />
@@ -60,70 +71,81 @@
         android:id="@+id/dateInfo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="13dp"
         android:text="12/03/23"
-        app:layout_constraintBottom_toTopOf="@+id/adressInfo"
-        app:layout_constraintStart_toStartOf="@+id/adressInfo" />
+        app:layout_constraintBottom_toBottomOf="@+id/dateI"
+        app:layout_constraintStart_toStartOf="@+id/adressInfo"
+        app:layout_constraintTop_toTopOf="@+id/dateI" />
 
     <TextView
         android:id="@+id/adressInfo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="27dp"
-        android:layout_marginBottom="21dp"
         android:text="Konutkent 2 Halısaha"
-        app:layout_constraintBottom_toTopOf="@+id/playerNoI"
-        app:layout_constraintStart_toEndOf="@+id/playerNoI" />
+        app:layout_constraintBottom_toBottomOf="@+id/adressI"
+        app:layout_constraintStart_toEndOf="@+id/playerNoI"
+        app:layout_constraintTop_toTopOf="@+id/adressI" />
 
     <TextView
         android:id="@+id/notesInfo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Su getirin!"
-        app:layout_constraintBottom_toBottomOf="@+id/NotesText2"
+        app:layout_constraintBottom_toBottomOf="@+id/notesText"
         app:layout_constraintEnd_toEndOf="@+id/playerNoInfo"
         app:layout_constraintStart_toEndOf="@+id/playerNoInfo"
-        app:layout_constraintTop_toTopOf="@+id/NotesText2" />
+        app:layout_constraintTop_toTopOf="@+id/notesText" />
 
     <TextView
         android:id="@+id/playerNoInfo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
         android:text="5/16"
+        app:layout_constraintBottom_toBottomOf="@+id/playerNoI"
         app:layout_constraintStart_toStartOf="@+id/adressInfo"
-        app:layout_constraintTop_toBottomOf="@+id/adressInfo" />
+        app:layout_constraintTop_toTopOf="@+id/playerNoI" />
 
     <Button
         android:id="@+id/registerButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="50dp"
-        android:layout_marginBottom="20dp"
+        android:layout_marginEnd="61dp"
+        android:layout_marginBottom="117dp"
         android:backgroundTint="#8BC34A"
         android:text="Register"
-        app:layout_constraintBottom_toTopOf="@+id/backButton"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
     <Button
         android:id="@+id/backButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="10dp"
         android:backgroundTint="@color/cem"
         android:text="Back"
-        app:layout_constraintEnd_toStartOf="@+id/registerButton"
-        app:layout_constraintTop_toBottomOf="@+id/unregisterButton" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/registerButton" />
 
     <Button
         android:id="@+id/unregisterButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="58dp"
-        android:layout_marginTop="54dp"
+        android:layout_marginEnd="2dp"
         android:backgroundTint="#E91E1E"
         android:text="Unregister"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/NotesText2" />
+        app:layout_constraintBottom_toBottomOf="@+id/registerButton"
+        app:layout_constraintEnd_toStartOf="@+id/backButton"
+        app:layout_constraintTop_toTopOf="@+id/registerButton"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <ListView
+        android:id="@+id/playersInMatch"
+        android:layout_width="405dp"
+        android:layout_height="193dp"
+        android:layout_marginBottom="56dp"
+        android:background="#FFE8E8"
+        app:layout_constraintBottom_toTopOf="@+id/unregisterButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

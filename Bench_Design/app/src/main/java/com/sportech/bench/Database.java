@@ -43,6 +43,12 @@ public class Database {
     public static void AddPlayerUnderMatch(User userInfo, Match matchInfo){
         matchReference.child(matchInfo.GetMatchID()).child("JoinedPlayers").setValue(userInfo.GetUserName());
     }
+    public static void RemoveMatchUnderPlayer(User userInfo, Match matchInfo){
+        userReference.child(userInfo.GetUserName()).child("JoinedMatches").child(matchInfo.GetMatchID()).removeValue();
+    }
+    public static void RemovePlayerUnderMatch(User userInfo, Match matchInfo){
+        matchReference.child(matchInfo.GetMatchID()).child("JoinedPlayers").child(userInfo.GetUserName()).removeValue();
+    }
 
 
     public static void GetAllUserInfo(UserListCallback callback){
@@ -90,6 +96,9 @@ public class Database {
     public interface BooleanCallback {
         void onCallback(boolean value);
     }
+    public interface StringListCallback {
+        void onCallback(ArrayList<String> value);
+    }
     public static void UserExists(String username, BooleanCallback callback){
         GetAllUserInfo(new UserListCallback() {
             @Override
@@ -133,6 +142,23 @@ public class Database {
                 }
                 callback.onCallback(match);
             }
+        });
+    }
+    public static void GetMatchesUnderUser(User user, StringListCallback callback){
+        userReference.child(user.GetUserName()).child("JoinedMatches").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                ArrayList<String> users = new ArrayList<String>();
+                Log.i("asd", String.valueOf(users.size()));
+                for (DataSnapshot dsp : dataSnapshot.getChildren()) {
+                    users.add((dsp.getValue(String.class)));
+                    Log.i("asd", String.valueOf(users.size()));
+                }
+                callback.onCallback(users);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) { }
         });
     }
 }
