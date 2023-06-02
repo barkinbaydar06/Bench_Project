@@ -127,6 +127,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+
     protected void goToSignUp() throws NoSuchAlgorithmException {
         Intent signIntent = new Intent(this, Register.class);
         finish();
