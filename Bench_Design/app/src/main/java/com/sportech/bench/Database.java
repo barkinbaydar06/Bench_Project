@@ -99,15 +99,14 @@ public class Database {
     }
 
     public static void UserExists(String username, BooleanCallback callback){
-        GetAllUserInfo(value -> {
-            boolean exists = false;
-            for(User u: value){
-                if(u.GetUserName().equals(username)){
-                    exists = true;
-                    break;
-                }
+        userReference.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                callback.onCallback(dataSnapshot.hasChild(username));
             }
-            callback.onCallback(exists);
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) { }
         });
     }
     public static void GetUserInfo(String username, UserCallback callback){
