@@ -103,7 +103,6 @@ public class MatchInfo extends AppCompatActivity {
     {
         Database.AddMatchUnderPlayer(Database.currentUser, Database.currentMatch);
         Database.AddPlayerUnderMatch(Database.currentUser, Database.currentMatch);
-        decreasePlayerNumber();
 
     }
 
@@ -111,7 +110,6 @@ public class MatchInfo extends AppCompatActivity {
     {
         Database.RemovePlayerUnderMatch(Database.currentUser, Database.currentMatch);
         Database.RemoveMatchUnderPlayer(Database.currentUser, Database.currentMatch);
-        increasePlayerNumber();
     }
 
     public void increasePlayerNumber()
