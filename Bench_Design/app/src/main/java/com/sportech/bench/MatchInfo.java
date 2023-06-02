@@ -6,10 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.provider.ContactsContract;
-import android.util.Log;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
@@ -102,35 +99,85 @@ public class MatchInfo extends AppCompatActivity {
 
     public void register()
     {
-        Database.GetRequiredPlayerCount(Database.currentMatch.GetMatchID(), new Database.IntCallback() {
+        Database.GetIfUserJoinedMatch(Database.currentUser, Database.currentMatch, new Database.BooleanCallback() {
             @Override
-            public void onCallback(int value) {
-                if(value > 0){
-                    Database.AddMatchUnderPlayer(Database.currentUser, Database.currentMatch);
-                    Database.AddPlayerUnderMatch(Database.currentUser, Database.currentMatch);
+            public void onCallback(boolean value) {
+                if(value){
+                    signUpAlertBuilder.setTitle("Alert");
+                    signUpAlertBuilder.setMessage("You are already joined!");
+                    signUpAlertBuilder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.cancel();
+                        }
+                    });
+                    signUpAlertBuilder.show();
+                }
+                else {
+                    Database.GetRequiredPlayerCount(Database.currentMatch.GetMatchID(), new Database.IntCallback() {
+                        @Override
+                        public void onCallback(int value) {
+                            if(value > 0){
+                                Database.AddMatchUnderPlayer(Database.currentUser, Database.currentMatch);
+                                Database.AddPlayerUnderMatch(Database.currentUser, Database.currentMatch);
 
-                    Database.SetRequiredPlayerCount(Database.currentMatch.GetMatchID(), value - 1);
-                    SetPlayerNumber(value - 1);
+                                Database.SetRequiredPlayerCount(Database.currentMatch.GetMatchID(), value - 1);
+                                SetPlayerNumber(value - 1);
+                            }
+                            else {
+                                signUpAlertBuilder.setTitle("Alert");
+                                signUpAlertBuilder.setMessage("The match is full!");
+                                signUpAlertBuilder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        dialog.cancel();
+                                    }
+                                });
+                                signUpAlertBuilder.show();
+                            }
+                        }
+                    });
                 }
             }
         });
+
     }
 
     public void unregister()
     {
-        Database.GetRequiredPlayerCount(Database.currentMatch.GetMatchID(), new Database.IntCallback() {
+        Database.GetIfUserJoinedMatch(Database.currentUser, Database.currentMatch, new Database.BooleanCallback() {
             @Override
-            public void onCallback(int value) {
-                Database.RemovePlayerUnderMatch(Database.currentUser, Database.currentMatch);
-                Database.RemoveMatchUnderPlayer(Database.currentUser, Database.currentMatch);
+            public void onCallback(boolean value) {
+                if(value){
+                    Database.GetRequiredPlayerCount(Database.currentMatch.GetMatchID(), new Database.IntCallback() {
+                        @Override
+                        public void onCallback(int value) {
+                            Database.RemovePlayerUnderMatch(Database.currentUser, Database.currentMatch);
+                            Database.RemoveMatchUnderPlayer(Database.currentUser, Database.currentMatch);
 
-                Database.SetRequiredPlayerCount(Database.currentMatch.GetMatchID(), value + 1);
-                SetPlayerNumber(value + 1);
+                            Database.SetRequiredPlayerCount(Database.currentMatch.GetMatchID(), value + 1);
+                            SetPlayerNumber(value + 1);
+                        }
+                    });
+                }
+                else {
+                    signUpAlertBuilder.setTitle("Alert");
+                    signUpAlertBuilder.setMessage("You are not joined!");
+                    signUpAlertBuilder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.cancel();
+                        }
+                    });
+                    signUpAlertBuilder.show();
+                }
             }
         });
+
     }
 
     public void SetPlayerNumber(int value){
         playerNo.setText(String.valueOf(value));
+
     }
 }
