@@ -116,7 +116,7 @@ public class NewMatch extends AppCompatActivity {
         if(informationCheck()){
             Time matchTime = new Time(Integer.parseInt(year.getText().toString()), Integer.parseInt(month.getText().toString()), Integer.parseInt(day.getText().toString()), Integer.parseInt(hour.getText().toString()), Integer.parseInt(min.getText().toString()));
 
-            Match newMatch = new Match(adress.getText().toString(), matchTime, notes.getText().toString());
+            Match newMatch = new Match(adress.getText().toString(), matchTime, notes.getText().toString(), Integer.parseInt(playerNo.getText().toString()));
 
             Database.AddMatch(newMatch);
 

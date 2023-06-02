@@ -97,6 +97,9 @@ public class Database {
     public interface StringListCallback {
         void onCallback(ArrayList<String> value);
     }
+    public interface IntCallback{
+        void onCallback(int value);
+    }
     public static void UserExists(String username, BooleanCallback callback){
         GetAllUserInfo(new UserListCallback() {
             @Override
@@ -174,8 +177,25 @@ public class Database {
             public void onCancelled(@NonNull DatabaseError error) { }
         });
     }
+    public static void GetRequiredPlayerCount(String matchID, IntCallback callback){
+        matchReference.child(matchID).child("RequiredPlayerCount").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                Integer count = dataSnapshot.getValue(Integer.class);
+                if(count != null){
+                    callback.onCallback(count);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) { }
+        });
+    }
+    public static void SetRequiredPlayerCount(String matchID, int newCount){
+        matchReference.child(matchID).child("RequiredPlayerCount").setValue(newCount);
+    }
     public static void GetIfUserJoinedMatch(User user, Match match, BooleanCallback callback){
-        userReference.child(user.GetUserName()).child("JoinedMatches").addValueEventListener(new ValueEventListener() {
+        userReference.child(user.GetUserName()).child("JoinedMatches").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 boolean joined = false;

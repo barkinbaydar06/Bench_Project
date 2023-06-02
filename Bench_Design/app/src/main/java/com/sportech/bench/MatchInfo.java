@@ -7,6 +7,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.provider.ContactsContract;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -48,14 +49,14 @@ public class MatchInfo extends AppCompatActivity {
         time = Database.currentMatch.GetTime().toString();
         text = Database.currentMatch.GetText();
         address = Database.currentMatch.GetAddress();
+        requiredPlayers = String.valueOf(Database.currentMatch.GetRequiredPlayerCount());
 
         players = findViewById(R.id.playersInMatch);
 
         matchDate.setText(time);
         matchAdress.setText(address);
         notes.setText(text);
-
-        playerNo.setText(Database.playersNeeded);
+        playerNo.setText(requiredPlayers);
 
 
         back.setOnClickListener(new View.OnClickListener() {
@@ -101,46 +102,35 @@ public class MatchInfo extends AppCompatActivity {
 
     public void register()
     {
-        Database.AddMatchUnderPlayer(Database.currentUser, Database.currentMatch);
-        Database.AddPlayerUnderMatch(Database.currentUser, Database.currentMatch);
-        decreasePlayerNumber();
+        Database.GetRequiredPlayerCount(Database.currentMatch.GetMatchID(), new Database.IntCallback() {
+            @Override
+            public void onCallback(int value) {
+                if(value > 0){
+                    Database.AddMatchUnderPlayer(Database.currentUser, Database.currentMatch);
+                    Database.AddPlayerUnderMatch(Database.currentUser, Database.currentMatch);
 
+                    Database.SetRequiredPlayerCount(Database.currentMatch.GetMatchID(), value - 1);
+                    SetPlayerNumber(value - 1);
+                }
+            }
+        });
     }
 
     public void unregister()
     {
-        Database.RemovePlayerUnderMatch(Database.currentUser, Database.currentMatch);
-        Database.RemoveMatchUnderPlayer(Database.currentUser, Database.currentMatch);
-        increasePlayerNumber();
+        Database.GetRequiredPlayerCount(Database.currentMatch.GetMatchID(), new Database.IntCallback() {
+            @Override
+            public void onCallback(int value) {
+                Database.RemovePlayerUnderMatch(Database.currentUser, Database.currentMatch);
+                Database.RemoveMatchUnderPlayer(Database.currentUser, Database.currentMatch);
+
+                Database.SetRequiredPlayerCount(Database.currentMatch.GetMatchID(), value + 1);
+                SetPlayerNumber(value + 1);
+            }
+        });
     }
 
-    public void increasePlayerNumber()
-    {
-        int playersNeeded = 0;
-        if (playerNo.getText().toString().charAt(0) != '/')
-        {
-            playersNeeded = Character.getNumericValue(playerNo.getText().toString().charAt(0));
-            if (playerNo.getText().charAt(1) != '/')
-            {
-                String playerNoString = playerNo.getText().toString().substring(0,2);
-                playersNeeded = Integer.parseInt(playerNoString);
-            }
-        }
-        playerNo.setText(String.valueOf(playersNeeded+1)+"/"+"16");
-    }
-
-    public void decreasePlayerNumber()
-    {
-        int playersNeeded = 0;
-        if (playerNo.getText().toString().charAt(0) != '/')
-        {
-            playersNeeded = Character.getNumericValue(playerNo.getText().toString().charAt(0));
-            if (playerNo.getText().charAt(1) != '/')
-            {
-                String playerNoString = playerNo.getText().toString().substring(0,2);
-                playersNeeded = Integer.parseInt(playerNoString);
-            }
-        }
-        playerNo.setText(String.valueOf(playersNeeded - 1)+"/"+16);
+    public void SetPlayerNumber(int value){
+        playerNo.setText(String.valueOf(value));
     }
 }

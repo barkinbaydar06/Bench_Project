@@ -6,16 +6,16 @@ import java.util.UUID;
 public class Match {
     public String Address;
     public Time Time;
-    public ArrayList<User> Players;
     public String Title;
     public String MatchID;
+    public int RequiredPlayerCount;
 
     public Match(){
         MatchID = UUID.randomUUID().toString();
     }
 
 
-    public Match(String address, Time time, String title){
+    public Match(String address, Time time, String title, int requiredPlayerCount){
         SetAddress(address);
         SetTime(time);
         SetText(title);
@@ -23,15 +23,6 @@ public class Match {
         MatchID = UUID.randomUUID().toString();
     }
 
-    public void AddPlayer(User p){
-        Players.add(p);
-    }
-    public void RemovePlayer(User p){
-        Players.remove(p);
-    }
-    public ArrayList<User> GetPlayers(){
-        return Players;
-    }
 
     public String GetAddress(){
         return Address;
@@ -42,6 +33,7 @@ public class Match {
     public String GetText(){
         return Title;
     }
+    public int GetRequiredPlayerCount(){ return RequiredPlayerCount; }
 
     public void SetAddress(String s){
         Address = s;
@@ -52,6 +44,7 @@ public class Match {
     public void SetText(String t){
         Title = t;
     }
+    public void SetRequiredPlayerCount(int c){ RequiredPlayerCount = c; }
     public String GetMatchID(){ return MatchID; }
 
 }

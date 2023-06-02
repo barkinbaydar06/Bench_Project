@@ -94,8 +94,10 @@
         android:text="Su getirin!"
         app:layout_constraintBottom_toBottomOf="@+id/notesText"
         app:layout_constraintEnd_toEndOf="@+id/playerNoInfo"
-        app:layout_constraintStart_toEndOf="@+id/playerNoInfo"
-        app:layout_constraintTop_toTopOf="@+id/notesText" />
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/playerNoInfo"
+        app:layout_constraintTop_toTopOf="@+id/notesText"
+        app:layout_constraintVertical_bias="0.0" />
 
     <TextView
         android:id="@+id/playerNoInfo"
