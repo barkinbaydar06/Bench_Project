@@ -1,7 +1,5 @@
 package com.sportech.bench;
 
-import android.util.Log;
-
 import androidx.annotation.NonNull;
 
 import com.google.firebase.database.DataSnapshot;
@@ -17,11 +15,31 @@ public class Database {
     public static User currentUser;
     public static Match currentMatch;
 
-    public static String playersNeeded;
-
     static FirebaseDatabase rootNode = FirebaseDatabase.getInstance();
     static DatabaseReference userReference = rootNode.getReference("UserInfo");
     static DatabaseReference matchReference = rootNode.getReference("MatchInfo");
+
+    public interface UserListCallback {
+        void onCallback(ArrayList<User> value);
+    }
+    public interface MatchListCallback {
+        void onCallback(ArrayList<Match> value);
+    }
+    public interface UserCallback {
+        void onCallback(User value);
+    }
+    public interface MatchCallback {
+        void onCallback(Match value);
+    }
+    public interface BooleanCallback {
+        void onCallback(boolean value);
+    }
+    public interface StringListCallback {
+        void onCallback(ArrayList<String> value);
+    }
+    public interface IntCallback{
+        void onCallback(int value);
+    }
 
     public static void AddUser(User info){
         userReference.child(info.GetUserName()).setValue(info);
@@ -53,7 +71,7 @@ public class Database {
          userReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                ArrayList<User> users = new ArrayList<User>();
+                ArrayList<User> users = new ArrayList<>();
                 for (DataSnapshot dsp : dataSnapshot.getChildren()) {
                     users.add((dsp.getValue(User.class)));
                 }
@@ -68,7 +86,7 @@ public class Database {
         matchReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                ArrayList<Match> matches = new ArrayList<Match>();
+                ArrayList<Match> matches = new ArrayList<>();
                 for (DataSnapshot dsp : dataSnapshot.getChildren()) {
                     matches.add(dsp.getValue(Match.class));
                 }
@@ -79,77 +97,48 @@ public class Database {
             public void onCancelled(@NonNull DatabaseError error) { }
         });
     }
-    public interface UserListCallback {
-        void onCallback(ArrayList<User> value);
-    }
-    public interface MatchListCallback {
-        void onCallback(ArrayList<Match> value);
-    }
-    public interface UserCallback {
-        void onCallback(User value);
-    }
-    public interface MatchCallback {
-        void onCallback(Match value);
-    }
-    public interface BooleanCallback {
-        void onCallback(boolean value);
-    }
-    public interface StringListCallback {
-        void onCallback(ArrayList<String> value);
-    }
-    public interface IntCallback{
-        void onCallback(int value);
-    }
+
     public static void UserExists(String username, BooleanCallback callback){
-        GetAllUserInfo(new UserListCallback() {
-            @Override
-            public void onCallback(ArrayList<User> value) {
-                boolean exists = false;
-                for(User u: value){
-                    if(u.GetUserName().equals(username)){
-                        exists = true;
-                        break;
-                    }
+        GetAllUserInfo(value -> {
+            boolean exists = false;
+            for(User u: value){
+                if(u.GetUserName().equals(username)){
+                    exists = true;
+                    break;
                 }
-                callback.onCallback(exists);
             }
+            callback.onCallback(exists);
         });
     }
     public static void GetUserInfo(String username, UserCallback callback){
-        GetAllUserInfo(new UserListCallback() {
-            @Override
-            public void onCallback(ArrayList<User> value) {
-                User user = null;
-                for(User u: value){
-                    if(u.GetUserName().equals(username)){
-                        user = u;
-                        break;
-                    }
+        GetAllUserInfo(value -> {
+            User user = null;
+            for(User u: value){
+                if(u.GetUserName().equals(username)){
+                    user = u;
+                    break;
                 }
-                callback.onCallback(user);
             }
+            callback.onCallback(user);
         });
     }
     public static void GetMatchInfo(String matchID, MatchCallback callback){
-        GetAllMatchInfo(new MatchListCallback() {
-            @Override
-            public void onCallback(ArrayList<Match> value) {
-                Match match = null;
-                for(Match m: value){
-                    if(m.GetMatchID().equals(matchID)){
-                        match = m;
-                        break;
-                    }
+        GetAllMatchInfo(value -> {
+            Match match = null;
+            for(Match m: value){
+                if(m.GetMatchID().equals(matchID)){
+                    match = m;
+                    break;
                 }
-                callback.onCallback(match);
             }
+            callback.onCallback(match);
         });
     }
     public static void GetJoinedMatches(String userName, StringListCallback callback){
         userReference.child(userName).child("JoinedMatches").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                ArrayList<String> matches = new ArrayList<String>();
+                ArrayList<String> matches = new ArrayList<>();
                 for (DataSnapshot dsp : dataSnapshot.getChildren()) {
                     matches.add(dsp.getValue(String.class));
 
@@ -165,7 +154,7 @@ public class Database {
         matchReference.child(matchID).child("JoinedPlayers").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                ArrayList<String> users = new ArrayList<String>();
+                ArrayList<String> users = new ArrayList<>();
                 for (DataSnapshot dsp : dataSnapshot.getChildren()) {
                     users.add(dsp.getValue(String.class));
 

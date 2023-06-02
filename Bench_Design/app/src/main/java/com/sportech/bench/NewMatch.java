@@ -122,7 +122,6 @@ public class NewMatch extends AppCompatActivity {
 
             Database.AddMatchUnderPlayer(Database.currentUser, newMatch);
             Database.AddPlayerUnderMatch(Database.currentUser, newMatch);
-            Database.playersNeeded = playerNo.getText().toString() + "/" + "16";
 
             cancelCreating();
         }

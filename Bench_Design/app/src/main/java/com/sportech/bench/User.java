@@ -8,8 +8,6 @@ public class User {
     public String UserName;
     public String SecurePassword;
 
-    private ArrayList<Match> Matches;
-
     public void SetUsername(String username){
         UserName = username;
     }
@@ -33,15 +31,5 @@ public class User {
     public boolean IsThePassword(String input) throws NoSuchAlgorithmException {
         String EncryptedPassword = Password.Encrypt(input);
         return Objects.equals(SecurePassword, Password.Hash(EncryptedPassword));
-    }
-
-    public void AddMatch(Match m){
-        Matches.add(m);
-    }
-    public void RemoveMatch(Match m){
-        Matches.remove(m);
-    }
-    public ArrayList<Match> GetMatches(){
-        return Matches;
     }
 }
